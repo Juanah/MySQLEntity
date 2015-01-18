@@ -30,6 +30,7 @@ namespace MySqlEntityTest
 			TestUmgebung u = new TestUmgebung ();
 
 			var result = u.isHallo (Hallo);
+
 		}
 
 	}
