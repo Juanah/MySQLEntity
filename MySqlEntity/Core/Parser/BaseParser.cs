@@ -55,6 +55,7 @@ namespace Core
 
 			}
 			Table table = new Table (this.ClassObject.GetType ().Name, properties);
+			table.OriginalObject = this.ClassObject;
 			table.PRIMARYKEY = table.Properties [0];
 			table.DatabaseName = mDbname;
 			return table;

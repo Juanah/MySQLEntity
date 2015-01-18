@@ -26,6 +26,7 @@ namespace Common
 		public Property PRIMARYKEY{ get; set; }
 		public Property AUTOINCREMENT{ get; set; }
 		public List<Property> Properties{ get; set; }
+		public Object OriginalObject{ get; set; }
 
 	}
 }

@@ -3,6 +3,9 @@ using MySqlEntity;
 using Core;
 using System.Collections.Generic;
 using Infrastructure;
+using System.Linq;
+using System.Linq;
+
 
 namespace MySqlEntityTest
 {
@@ -53,16 +56,19 @@ namespace MySqlEntityTest
 				Gehalt = 300.30
 			};
 
-			context.Insert (person2);
+			context.Insert<Person> (person2);
 
-			if (context.Insert (person)) {
+			if (context.Insert<Person>(person)) {
 				Console.WriteLine ("Insert successful");
 			} else {
 				Console.WriteLine ("Insert failed");
 			}
 
 
-			var result = context.GetTable (new Person ());
+			var result = context.GetTable<Person> (typeof(Person)).Where (n => n.Name == "Jonas").ToList ();
+
+
+
 
 			Console.WriteLine (result.Count);
 

@@ -5,6 +5,7 @@ using Common;
 using Infrastructure.Core;
 using Infrastructure;
 using log4net;
+using System.Linq;
 
 namespace MySqlEntity
 {
@@ -73,7 +74,7 @@ namespace MySqlEntity
 
 		}
 
-		public bool Insert(IEntity entity)
+		public bool Insert<TEntity>(TEntity entity)
 		{
 			Table table = mBaseParser.getTable (entity, mConnectionInfo.GetDatabasename ());
 
@@ -87,22 +88,30 @@ namespace MySqlEntity
 		}
 
 
-		public List<Object> GetTable(IEntity target)
+		public List<TEntity> GetTable<TEntity>(Type type)
 		{
+
+
 			if (this.mDecoder == null)
 				this.mDecoder = new BaseDecoder ();
-			List<Object> objects = new List<object> ();
+			List<TEntity> objects = new List<TEntity> ();
 
-			Table table = mBaseParser.getTable (target, mConnectionInfo.GetDatabasename ());
+			Table table = this.Tables.FirstOrDefault(t => t.OriginalObject.GetType().Equals(type));
+
+			if (table == null) {
+				log.Error("table null referenz");
+				throw new ArgumentNullException("table","is Null");
+			}
+
 
 			SqlQuery query = BaseQueryBuilder.GetTables (table);
 
 			var result = mConnection.ExecuteReaderQuery (query, table.Properties.Count);
 
 			foreach (var array in result) {
-				object clone = ((IEntity)target).DeepCopy ();
+				object clone = ((IEntity)table.OriginalObject).DeepCopy ();
 				var convertedObject = mDecoder.Decode (array, clone);
-				objects.Add (convertedObject);
+				objects.Add ((TEntity)convertedObject);
 			}
 
 			return objects;
