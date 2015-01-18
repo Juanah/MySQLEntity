@@ -38,6 +38,7 @@
     <Compile Include="Entity\Table.cs" />
     <Compile Include="Entity\DB.cs" />
     <Compile Include="Entity\Property.cs" />
+    <Compile Include="Enums\AttributeTyp.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -9,6 +9,7 @@ namespace MySqlEntityTest
 		{
 		}
 
+		[IDKey(true)]
 		public int Id{get;set;}
 
 

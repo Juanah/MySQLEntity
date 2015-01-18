@@ -34,6 +34,15 @@ namespace MySqlEntityTest
 
 
 
+			List<string> strList = new List<string> ();
+			string hallo = "hallo";
+			string welt = "welt";
+
+			strList.Add (hallo);
+			strList.Add (welt);
+			BaseParser parser = new BaseParser ();
+
+			var re = parser.GenerateTableFromList<string> (strList, "strList", "entityTest");
 
 
 			context.Parse ();
@@ -63,6 +72,15 @@ namespace MySqlEntityTest
 			} else {
 				Console.WriteLine ("Insert failed");
 			}
+
+
+			TestEntity tEntity = new TestEntity () {
+				Name = "PenisKopf"
+			};
+
+
+
+			context.Insert<TestEntity> (tEntity);
 
 
 			var result = context.GetTable<Person> (typeof(Person)).Where (n => n.Name == "Jonas").ToList ();

@@ -41,6 +41,8 @@
     <Compile Include="Core\IDecoder.cs" />
     <Compile Include="Core\IEntity.cs" />
     <Compile Include="Core\Attributes\IDKey.cs" />
+    <Compile Include="Core\Attributes\IAttribute.cs" />
+    <Compile Include="Core\Attributes\PrimitivList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

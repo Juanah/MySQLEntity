@@ -35,13 +35,16 @@ namespace Core
 
 			string valueStr = "VALUES(";
 
-			bool idField = true; // shows if this is the ID Field, we dont wanna take that
 
 			foreach (var property in table.Properties) {
-				if (idField) { // Skip the id field ( musst be allways the first property)
-					idField = false;
+				if (property == table.PRIMARYKEY) {
+					if (table.Properties.IndexOf (property) == (table.Properties.Count - 1)) {
+						query += ")";
+						valueStr += ");";
+					}
 					continue;
 				}
+
 				query 
 				+= u
 					+ property.PropertyName
@@ -53,8 +56,10 @@ namespace Core
 					query += ")";
 					valueStr += ");";
 				} else {
-					query += ",";
-					valueStr += ",";
+					if (table.Properties[table.Properties.IndexOf(property) +1] != table.PRIMARYKEY) {
+						query += ",";
+						valueStr += ",";
+					}
 				}
 				
 			}

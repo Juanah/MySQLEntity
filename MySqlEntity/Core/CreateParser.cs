@@ -30,10 +30,16 @@ namespace Core
 
 			foreach (var property in table.Properties) {
 
-				if (counter == 0) {
+				if (property == table.PRIMARYKEY) {
+			
 					tableQuery += " " + up 
 						+ property.PropertyName + up
-						+ " " + getType (property) + " NOT NULL AUTO_INCREMENT,";
+						+ " " + getType (property) + " NOT NULL";
+					if (table.AUTOINCREMENT) {
+						tableQuery += " AUTO_INCREMENT,";
+					} else {
+						tableQuery += ",";
+					}
 				} else {
 					tableQuery += " " + up 
 						+ property.PropertyName + up

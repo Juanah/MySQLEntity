@@ -9,9 +9,12 @@ namespace MySqlEntityTest
 		{
 		}
 
-		public int ID{ get; set; }
+
 
 		public string Name{ get; set; }
+
+		[IDKey(true)]
+		public int ID{ get; set; }
 
 		#region IEntity implementation
 

@@ -7,7 +7,9 @@ namespace Infrastructure
 	{
 		public IDKey (bool autoincrement)
 		{
+			this.isAutoincrement = autoincrement;
 		}
+		public bool isAutoincrement{ get; set; }
 	}
 }
 
