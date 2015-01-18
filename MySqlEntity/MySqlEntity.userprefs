@@ -1,0 +1,21 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MySqlEntityTest/Program.cs">
+    <Files>
+      <File FileName="Core/ConnectionInfo.cs" Line="48" Column="13" />
+      <File FileName="Context.cs" Line="68" Column="3" />
+      <File FileName="Infrastructure/Core/IConnection.cs" Line="12" Column="35" />
+      <File FileName="Core/Connection.cs" Line="42" Column="4" />
+      <File FileName="Core/Parser/BaseParser.cs" Line="34" Column="17" />
+      <File FileName="Core/CreateParser.cs" Line="71" Column="15" />
+      <File FileName="Infrastructure/Core/IClassParser.cs" Line="9" Column="28" />
+      <File FileName="Infrastructure/Core/IDBConnectionInfo.cs" Line="9" Column="28" />
+      <File FileName="Infrastructure/Core/IParser.cs" Line="11" Column="35" />
+      <File FileName="MySqlEntityTest/Program.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

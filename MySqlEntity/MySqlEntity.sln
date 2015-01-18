@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySqlEntity", "MySqlEntity.csproj", "{3ED87C8C-AF88-41E3-B8B8-626A39B5DBB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{F803F296-4BC5-4F97-AB55-A2AF8D0972CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5BB6C34B-E228-43C0-A6DB-5FA3A3216582}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{E27E642E-A49B-4E8C-95FC-224D1B2FEF81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySqlEntityTest", "MySqlEntityTest\MySqlEntityTest.csproj", "{A60843ED-EFFA-4BD9-AE49-941C997814D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3ED87C8C-AF88-41E3-B8B8-626A39B5DBB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED87C8C-AF88-41E3-B8B8-626A39B5DBB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED87C8C-AF88-41E3-B8B8-626A39B5DBB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED87C8C-AF88-41E3-B8B8-626A39B5DBB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BB6C34B-E228-43C0-A6DB-5FA3A3216582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB6C34B-E228-43C0-A6DB-5FA3A3216582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB6C34B-E228-43C0-A6DB-5FA3A3216582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB6C34B-E228-43C0-A6DB-5FA3A3216582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A60843ED-EFFA-4BD9-AE49-941C997814D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A60843ED-EFFA-4BD9-AE49-941C997814D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A60843ED-EFFA-4BD9-AE49-941C997814D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A60843ED-EFFA-4BD9-AE49-941C997814D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E27E642E-A49B-4E8C-95FC-224D1B2FEF81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E27E642E-A49B-4E8C-95FC-224D1B2FEF81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E27E642E-A49B-4E8C-95FC-224D1B2FEF81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E27E642E-A49B-4E8C-95FC-224D1B2FEF81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F803F296-4BC5-4F97-AB55-A2AF8D0972CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F803F296-4BC5-4F97-AB55-A2AF8D0972CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F803F296-4BC5-4F97-AB55-A2AF8D0972CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F803F296-4BC5-4F97-AB55-A2AF8D0972CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = MySqlEntityTest\MySqlEntityTest.csproj
+	EndGlobalSection
+EndGlobal
