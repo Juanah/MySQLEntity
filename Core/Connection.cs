@@ -14,9 +14,7 @@ namespace Core
 	public class Connection: IConnection
 	{
 
-		ILog log = log4net.LogManager.GetLogger
-			(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType); 
-
+		ILog log = LogManager.GetLogger (typeof(Connection));
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Core.Connection"/> class.
 		/// </summary>

@@ -1,14 +1,6 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Core/Context.cs">
-    <Files>
-      <File FileName="Core/Query/BaseQueryBuilder.cs" Line="1" Column="1" />
-      <File FileName="Core/Context.cs" Line="70" Column="5" />
-      <File FileName="MySqlEntityTest/Program.cs" Line="1" Column="1" />
-      <File FileName="Core/Parser/BaseParser.cs" Line="1" Column="1" />
-      <File FileName="MySqlEntityTest/Command.cs" Line="1" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

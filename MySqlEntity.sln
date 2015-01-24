@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySqlEntity", "MySqlEntity.csproj", "{3ED87C8C-AF88-41E3-B8B8-626A39B5DBB2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{F803F296-4BC5-4F97-AB55-A2AF8D0972CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5BB6C34B-E228-43C0-A6DB-5FA3A3216582}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3ED87C8C-AF88-41E3-B8B8-626A39B5DBB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3ED87C8C-AF88-41E3-B8B8-626A39B5DBB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3ED87C8C-AF88-41E3-B8B8-626A39B5DBB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3ED87C8C-AF88-41E3-B8B8-626A39B5DBB2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5BB6C34B-E228-43C0-A6DB-5FA3A3216582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5BB6C34B-E228-43C0-A6DB-5FA3A3216582}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BB6C34B-E228-43C0-A6DB-5FA3A3216582}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -40,5 +34,6 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = MySqlEntityTest\MySqlEntityTest.csproj
+		description = @What is working:\n;create table from Classes with primitiv properties\n;create Database \n;insert, update, delete Entities\n;Foreignkey
 	EndGlobalSection
 EndGlobal
