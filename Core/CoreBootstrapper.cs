@@ -4,6 +4,7 @@ using System.Windows;
 using log4net;
 namespace Core
 {
+	[Obsolete()]
 	public class CoreBootstrapper: UnityBootstrapper 
 	{
 		ILog Log = LogManager.GetLogger (typeof(CoreBootstrapper));

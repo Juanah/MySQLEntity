@@ -5,6 +5,9 @@ using Infrastructure;
 
 namespace Core
 {
+	/// <summary>
+	/// Basequerybuilde converts tables into MySql understandable queries.
+	/// </summary>
 	public static class BaseQueryBuilder
 	{
 		private static char u = '`';
@@ -30,6 +33,10 @@ namespace Core
 
 		//Update
 		//UPDATE `entityTest`.`Person` SET `Name`='Test3' WHERE `Id`='1';
+		/// <summary>
+		/// UPDAT the specified table.
+		/// </summary>
+		/// <param name="table">Table.</param>
 		public static SqlQuery UPDATE(Table table)
 		{
 			string query = "UPDATE "
@@ -41,8 +48,6 @@ namespace Core
 					+ table.TableName
 					+ u
 					+ " SET ";
-
-
 			foreach (var property in table.Properties) {
 				if (table.PRIMARYKEY == property) {
 					continue;
@@ -53,9 +58,6 @@ namespace Core
 					+ u
 					+ "="
 					+ getValue (property.Value,property.AttributeTyp,true);
-
-
-
 				if (table.Properties.IndexOf (property) == (table.Properties.Count - 1)) {
 					query +=  " WHERE " + u+ table.PRIMARYKEY.PropertyName + u + "=" + "'" + ((int)table.PRIMARYKEY.Value).ToString() + "'" +";";
 				} else {
@@ -66,7 +68,6 @@ namespace Core
 
 			}
 			return new SqlQuery((query),false); 
-
 		}
 
 		/// <summary>
@@ -86,7 +87,6 @@ namespace Core
 				+ "(";
 
 			string valueStr = "VALUES(";
-
 			foreach (var property in table.Properties) {
 				if (property == table.PRIMARYKEY) {
 					if (table.Properties.IndexOf (property) == (table.Properties.Count - 1)) {
@@ -99,9 +99,7 @@ namespace Core
 				+= u
 					+ property.PropertyName
 					+ u;
-
 				valueStr += getValue (property.Value,property.AttributeTyp);
-
 				if (table.Properties.IndexOf (property) == (table.Properties.Count - 1)) {
 					query += ")";
 					valueStr += ");";
@@ -111,11 +109,9 @@ namespace Core
 						valueStr += ",";
 					}
 				}
-				
 			}
 			return new SqlQuery((query + valueStr),false); 
 		}
-
 
 		/// <summary>
 		/// DELET the specified table.

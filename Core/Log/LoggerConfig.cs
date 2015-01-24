@@ -7,8 +7,14 @@ using log4net;
 
 namespace Core
 {
+	/// <summary>
+	/// Logger config.
+	/// </summary>
 	internal class LoggerConfig
 	{
+		/// <summary>
+		/// Setup loggerconfig
+		/// </summary>
 		public static void Setup()
 		{
 			Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();

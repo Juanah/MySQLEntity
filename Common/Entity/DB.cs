@@ -2,6 +2,7 @@ using System;
 
 namespace Common
 {
+	[Obsolete("Wird die noch verwendet?")]
 	public class DB
 	{
 		public DB ()

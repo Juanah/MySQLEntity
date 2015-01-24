@@ -3,6 +3,7 @@ using Infrastructure;
 
 namespace Core
 {
+	[Obsolete("Not in use atm")]
 	public class PrimitivListDecoder: IDecoder 
 	{
 		public PrimitivListDecoder ()

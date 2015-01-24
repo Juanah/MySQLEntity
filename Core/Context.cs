@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace Core
 {
+	/// <summary>
+	/// The Context is the Frameworkcontroller
+	/// </summary>
 	public class Context
 	{
 		ILog log = log4net.LogManager.GetLogger
@@ -15,6 +18,9 @@ namespace Core
 
 		private static BaseParser mBaseParser = new BaseParser();
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Core.Context"/> class.
+		/// </summary>
 		public Context ()
 		{
 			this.Tables = new List<Table> ();
@@ -22,20 +28,31 @@ namespace Core
 			LoggerConfig.Setup ();
 		}
 		
-
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Core.Context"/> class.
+		/// </summary>
+		/// <param name="info">Info.</param>
 		public Context (IDBConnectionInfo info)
 		{
 			this.ConnectionInfo = info;
 			this.Tables = new List<Table> ();
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Core.Context"/> class.
+		/// </summary>
+		/// <param name="info">Info.</param>
+		/// <param name="entities">Entities.</param>
 		public Context (IDBConnectionInfo info,List<IEntity> entities)
 		{
 			this.Entities = entities;
 			this.ConnectionInfo = info;
 			this.Tables = new List<Table> ();
 		}
-
+		/// <summary>
+		/// Creates the database.
+		/// </summary>
+		/// <returns><c>true</c>, if database was created, <c>false</c> otherwise.</returns>
 		public virtual bool CreateDatabase()
 		{
 			if (Connection == null) {
@@ -45,6 +62,9 @@ namespace Core
 			return Connection.ExecuteQuery (new SqlQuery ("CREATE SCHEMA `" + ConnectionInfo.GetDatabasename() + "`", false));
 		}
 
+		/// <summary>
+		/// Create this instance.
+		/// </summary>
 		public virtual bool Create()
 		{
 			CreateParser createParser = new CreateParser ();
@@ -68,11 +88,14 @@ namespace Core
 					return false;
 				}
 			}
-
 			return true;
-
 		}
 
+		/// <summary>
+		/// Insert the specified entity.
+		/// </summary>
+		/// <param name="entity">Entity.</param>
+		/// <typeparam name="TEntity">The 1st type parameter.</typeparam>
 		public bool Insert<TEntity>(TEntity entity)
 		{
 			List<Table> table = mBaseParser.getTable (entity, ConnectionInfo.GetDatabasename ());
@@ -85,10 +108,14 @@ namespace Core
 					return false;
 				}
 			}
-
 			return true;
 		}
 
+		/// <summary>
+		/// Update the specified entity.
+		/// </summary>
+		/// <param name="entity">Entity.</param>
+		/// <typeparam name="TEntity">The 1st type parameter.</typeparam>
 		public bool Update<TEntity>(TEntity entity)
 		{
 			List<Table> table = mBaseParser.getTable (entity, ConnectionInfo.GetDatabasename ());
@@ -100,10 +127,14 @@ namespace Core
 					return false;
 				}
 			}
-
 			return true;
 		}
 
+		/// <summary>
+		/// Delete the specified entity.
+		/// </summary>
+		/// <param name="entity">Entity.</param>
+		/// <typeparam name="TEntity">The 1st type parameter.</typeparam>
 		public bool Delete<TEntity>(TEntity entity)
 		{
 			Table table = mBaseParser.getTable (entity, ConnectionInfo.GetDatabasename ()).FirstOrDefault(t => t.State == ETableState.Normal);
@@ -113,10 +144,14 @@ namespace Core
 			return Connection.ExecuteQuery (query);
 		}
 
+		/// <summary>
+		/// Gets the table.
+		/// </summary>
+		/// <returns>The table.</returns>
+		/// <param name="type">Type.</param>
+		/// <typeparam name="TEntity">The 1st type parameter.</typeparam>
 		public List<TEntity> GetTable<TEntity>(Type type)
 		{
-
-
 			if (this.mDecoder == null)
 				this.mDecoder = new BaseDecoder ();
 			List<TEntity> objects = new List<TEntity> ();
@@ -138,7 +173,9 @@ namespace Core
 
 			return objects;
 		}
-
+		/// <summary>
+		/// Parse this instance.
+		/// </summary>
 		public virtual void Parse()
 		{
 			BaseParser rawPaser = new BaseParser ();

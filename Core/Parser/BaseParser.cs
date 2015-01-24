@@ -14,9 +14,16 @@ namespace Core
 	/// </summary>
 	public class BaseParser:IClassParser
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Core.BaseParser"/> class.
+		/// </summary>
 		public BaseParser ()
 		{
 		}
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Core.BaseParser"/> class.
+		/// </summary>
+		/// <param name="dbName">Db name.</param>
 		public BaseParser (string dbName)
 		{
 		}
@@ -30,9 +37,7 @@ namespace Core
 			this.ClassObject = obj;
 			this.mDbname = databasename;
 			return GenerateTable ();
-
 		}
-
 
 		/// <summary>
 		/// Generates the table.
@@ -40,24 +45,17 @@ namespace Core
 		/// <returns>A List with Table(s)</returns>
 		private List<Table> GenerateTable()
 		{
-
-			List<Table> tables = new List<Table> ();
-
-			Type classType = this.ClassObject.GetType ();
-
+			List<Table> tables = new List<Table> (); //Will be returned
+			Type classType = this.ClassObject.GetType (); //Type from baseClass
 			//Get all Properties from object
 			PropertyInfo[] infos = classType.GetProperties(BindingFlags.Public|BindingFlags.Instance);
-
 			//Nessary for the table
 			List<Property> properties = new List<Property> ();
-			Table table = new Table ();
-
+			Table table = new Table (); //State Normal, it is the Base
+			table.State = ETableState.Normal;
 			foreach (var info in infos) {
-
 				var property = GetProperty (info);
-
 				var attributes = info.GetCustomAttributes (false);
-				
 				foreach (var atr in attributes) {
 					if (atr.GetType () == typeof(IDKey)) { // looks like Id
 						IDKey key = (IDKey)atr;
@@ -77,19 +75,16 @@ namespace Core
 					} else if (atr.GetType () == typeof(ForeignKey)) {
 						ForeignKey fKey = (ForeignKey)atr;
 						property.ForeignType = fKey.ForeignKeyType;
-						property.ValueType = typeof(int);
+						property.ValueType = typeof(int); //Instead of the real neasted object, we will put the reference Id as integer
 						int id = 0;
 						if (property.Value != null) {
 							id = ((IEntity)property.Value).GetId ();
 							property.Value = id;
-
 						}
 						property.AttributeTyp = AttributeTyp.Foreignkey;
 					}
 				}
-
 				properties.Add (property);
-
 			}
 			table.Properties = properties;
 			table.TableName = this.ClassObject.GetType ().Name;
@@ -105,6 +100,15 @@ namespace Core
 			return GenerateTableFromList<object> (list, name, mDbname);
 		}
 
+		/// <summary>
+		/// Experimental
+		/// shoud convert PrimitvTyp Lists into a table
+		/// </summary>
+		/// <returns>The table from list.</returns>
+		/// <param name="list">List.</param>
+		/// <param name="name">Name.</param>
+		/// <param name="databasename">Databasename.</param>
+		/// <typeparam name="TEntity">The 1st type parameter.</typeparam>
 		public Table GenerateTableFromList<TEntity>(List<TEntity> list,string name,string databasename)
 		{
 			Table table = new Table ();
@@ -138,6 +142,10 @@ namespace Core
 		}
 
 		private Object ClassObject;
+		/// <summary>
+		/// Gets or sets the m dbname.
+		/// </summary>
+		/// <value>The m dbname.</value>
 		public string mDbname{ get; set; }
 	}
 }

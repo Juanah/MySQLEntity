@@ -8,12 +8,19 @@ using System.Collections.Generic;
 
 namespace Core
 {
+	/// <summary>
+	/// Is the Interface between Framework and MySqlDatabase
+	/// </summary>
 	public class Connection: IConnection
 	{
 
 		ILog log = log4net.LogManager.GetLogger
 			(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType); 
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Core.Connection"/> class.
+		/// </summary>
+		/// <param name="info">Info.</param>
 		public Connection (IDBConnectionInfo info)
 		{
 
@@ -22,7 +29,9 @@ namespace Core
 		}
 
 		#region IConnection implementation
-
+		/// <summary>
+		/// Open the Databaseconnection.
+		/// </summary>
 		public bool Open ()
 		{
 			try {
@@ -34,6 +43,9 @@ namespace Core
 			}
 		}
 
+		/// <summary>
+		/// Closes the Databaseconnection
+		/// </summary>
 		public bool Close ()
 		{
 			try {
@@ -44,6 +56,11 @@ namespace Core
 				return false;
 			}
 		}
+		/// <summary>
+		/// Executes the query.
+		/// </summary>
+		/// <returns><c>true</c>, if query was executed, <c>false</c> otherwise.</returns>
+		/// <param name="query">Query.</param>
 		public bool ExecuteQuery (Common.SqlQuery query)
 		{
 			try {
@@ -67,7 +84,12 @@ namespace Core
 			}
 		}
 
-
+		/// <summary>
+		/// Executes the reader query.
+		/// </summary>
+		/// <returns>The reader query.</returns>
+		/// <param name="query">Query.</param>
+		/// <param name="columns">Columns.</param>
 		public List<List<Object>> ExecuteReaderQuery(Common.SqlQuery query,int columns)
 		{
 			try {
@@ -102,48 +124,10 @@ namespace Core
 
 
 		#endregion
-
-
-		/*
-		 * using System;
-using System.Data;
-
-using MySql.Data;
-using MySql.Data.MySqlClient;
-
-public class Tutorial2
-{
-    public static void Main()
-    {
-        string connStr = "server=localhost;user=root;database=world;port=3306;password=******;";
-        MySqlConnection conn = new MySqlConnection(connStr);
-        try
-        {
-            Console.WriteLine("Connecting to MySQL...");
-            conn.Open();
-
-            string sql = "SELECT Name, HeadOfState FROM Country WHERE Continent='Oceania'";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-
-            while (rdr.Read())
-            {
-                Console.WriteLine(rdr[0]+" -- "+rdr[1]);
-            }
-            rdr.Close();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.ToString());
-        }
-
-        conn.Close();
-        Console.WriteLine("Done.");
-    }
-}
-
-*/
-
+		/// <summary>
+		/// Gets or sets the db connection.
+		/// </summary>
+		/// <value>The db connection.</value>
 		public IDbConnection DbConnection{ get; set; }
 	}
 }
