@@ -27,7 +27,7 @@ namespace Common
 		public bool AUTOINCREMENT{ get; set; }
 		public List<Property> Properties{ get; set; }
 		public Object OriginalObject{ get; set; }
-
+		public ETableState State{ get; set; }
 	}
 }
 

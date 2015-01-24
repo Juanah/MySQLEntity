@@ -32,6 +32,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -40,6 +43,14 @@
     <Compile Include="TestEntity2.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="TestUmgebung.cs" />
+    <Compile Include="RandomStringGenerator.cs" />
+    <Compile Include="Log\LoggerConfig.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="Commands\Enums\EGlobalCommand.cs" />
+    <Compile Include="Commands\EnumHelper.cs" />
+    <Compile Include="ForeignKeyTest.cs" />
+    <Compile Include="KontaktDaten.cs" />
+    <Compile Include="KontaktItems\Telefonnummer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -55,9 +66,13 @@
       <Project>{5BB6C34B-E228-43C0-A6DB-5FA3A3216582}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MySqlEntity.csproj">
-      <Project>{3ED87C8C-AF88-41E3-B8B8-626A39B5DBB2}</Project>
-      <Name>MySqlEntity</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Commands\Enums\" />
+    <Folder Include="KontaktItems\" />
   </ItemGroup>
 </Project>

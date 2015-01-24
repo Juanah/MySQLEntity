@@ -1,0 +1,14 @@
+﻿2015-01-24 02:23:05,287 [1] INFO  MySqlEntityTest - Test DB erstellung
+2015-01-24 02:23:13,154 [1] INFO  MySqlEntityTest - Created DatabaseentityTest
+2015-01-24 02:23:13,159 [1] INFO  Core.Context - Connection is Null, create one
+2015-01-24 02:23:18,293 [1] INFO  MySqlEntityTest - Create Tables on Database:entityTest
+2015-01-24 02:23:18,294 [1] INFO  MySqlEntityTest - Table :TestEntity
+2015-01-24 02:23:18,295 [1] INFO  MySqlEntityTest - Table :TestEntity2
+2015-01-24 02:23:18,295 [1] INFO  MySqlEntityTest - Table :Person
+2015-01-24 02:23:18,295 [1] INFO  MySqlEntityTest - Table :ForeignKeyTest
+2015-01-24 02:23:18,310 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`TestEntity`( `Name` VARCHAR(1000) NULL, `ID` INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (`ID`));
+2015-01-24 02:23:18,324 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`TestEntity2`( `Id` INT NOT NULL AUTO_INCREMENT, `Haus` VARCHAR(1000) NULL, PRIMARY KEY (`Id`));
+2015-01-24 02:23:18,352 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`Person`( `Id` INT NOT NULL AUTO_INCREMENT, `Name` VARCHAR(1000) NULL, `Nachname` VARCHAR(1000) NULL, `Gehalt` DOUBLE NULL, PRIMARY KEY (`Id`));
+2015-01-24 02:23:18,379 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`ForeignKeyTest`( `Id` INT NOT NULL AUTO_INCREMENT, `MeineTestPerson` INT NULL, PRIMARY KEY (`Id`));
+2015-01-24 02:23:26,986 [1] INFO  MySqlEntityTest - Insert Entity Person :[Person: Id=0, Name=jonas, Nachname=%5Xl(mR>ToR,>*g, Gehalt=164985,140299088]
+2015-01-24 02:36:12,549 [1] INFO  MySqlEntityTest - foreign

@@ -18,10 +18,22 @@ namespace MySqlEntityTest
 
 		public double Gehalt{ get; set; }
 
+		[ForeignKey(typeof(KontaktDaten))]
+		public KontaktDaten KontaktDaten{ get; set; }
+
+		public override string ToString ()
+		{
+			return string.Format ("[Person: Id={0}, Name={1}, Nachname={2}, Gehalt={3}]", Id, Name, Nachname, Gehalt);
+		}
+
 		#region IEntity implementation
 		public object DeepCopy ()
 		{
 			return (Person)this.MemberwiseClone ();
+		}
+		public int GetId ()
+		{
+			return Id;
 		}
 		#endregion
 	}

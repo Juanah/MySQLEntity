@@ -1,5 +1,6 @@
 using System;
 using Infrastructure.Core;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Core
 {

@@ -57,7 +57,7 @@ namespace Core
 					command.ExecuteNonQuery ();
 				}
 
-
+				Close();
 
 				return true;
 
@@ -79,7 +79,7 @@ namespace Core
 				}
 				MySqlCommand command = new MySqlCommand (query.Query, (MySqlConnection)DbConnection);
 				MySqlDataReader reader = command.ExecuteReader();
-
+				//0=Row1=columnValues
 				List<List<object>> list = new List<List<object>>();
 
 				while (reader.Read()) {
@@ -90,7 +90,7 @@ namespace Core
 					}
 					list.Add(tempObjectList);
 				}
-
+				Close();
 				return list;
 
 			} catch (Exception ex) {

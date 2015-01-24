@@ -5,7 +5,8 @@ namespace Common
 	public enum AttributeTyp
 	{
 		Key,
-		Foreignkey
+		Foreignkey,
+		PrimitvList
 
 	}
 }

@@ -43,6 +43,7 @@
     <Compile Include="Core\Attributes\IDKey.cs" />
     <Compile Include="Core\Attributes\IAttribute.cs" />
     <Compile Include="Core\Attributes\PrimitivList.cs" />
+    <Compile Include="Core\Attributes\ForeignKey.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -54,5 +55,6 @@
   <ItemGroup>
     <Folder Include="Core\" />
     <Folder Include="Core\Attributes\" />
+    <Folder Include="Core\Attributes\TableEnums\" />
   </ItemGroup>
 </Project>

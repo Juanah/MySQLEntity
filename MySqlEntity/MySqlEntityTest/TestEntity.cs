@@ -26,6 +26,11 @@ namespace MySqlEntityTest
 
 		}
 
+		public int GetId ()
+		{	
+			return ID;
+		}
+
 		#endregion
 	}
 }

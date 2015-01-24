@@ -1,12 +1,13 @@
 using System;
 using Common;
+using System.Collections.Generic;
 
 namespace Infrastructure.Core
 {
 	public interface IClassParser
 	{
 
-		Table getTable(Object obj,string databasename);
+		List<Table> getTable(Object obj,string databasename);
 
 	}
 }

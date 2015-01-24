@@ -6,9 +6,13 @@ namespace Core
 	{
 		private static char u = '`';
 		private static string upKomma = "'";
+		/// <summary>
+		/// Gets the table query.
+		/// </summary>
+		/// <returns>The tables.</returns>
+		/// <param name="table">Table.</param>
 		public static SqlQuery GetTables(Table table)
 		{
-
 			string query = "SELECT * FROM"
 				+ u 
 				+ table.DatabaseName
@@ -21,6 +25,10 @@ namespace Core
 			return new SqlQuery (query, false);
 		}
 
+		/// <summary>
+		/// INSER the specified table.
+		/// </summary>
+		/// <param name="table">Table.</param>
 		public static SqlQuery INSERT(Table table)
 		{
 			string query = "INSERT INTO "
@@ -35,7 +43,6 @@ namespace Core
 
 			string valueStr = "VALUES(";
 
-
 			foreach (var property in table.Properties) {
 				if (property == table.PRIMARYKEY) {
 					if (table.Properties.IndexOf (property) == (table.Properties.Count - 1)) {
@@ -44,7 +51,6 @@ namespace Core
 					}
 					continue;
 				}
-
 				query 
 				+= u
 					+ property.PropertyName
@@ -65,7 +71,6 @@ namespace Core
 			}
 			return new SqlQuery((query + valueStr),false); 
 		}
-
 
 		private static string getValue(object value)
 		{

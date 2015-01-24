@@ -4,93 +4,233 @@ using Core;
 using System.Collections.Generic;
 using Infrastructure;
 using System.Linq;
-using System.Linq;
-
+using log4net;
 
 namespace MySqlEntityTest
 {
 	class MainClass
 	{
+		private static Context context;
+		private static RandomStringGenerator stringGenerator = new RandomStringGenerator ();
+		private static ILog Log = LogManager.GetLogger("MySqlEntityTest");
+
 		public static void Main (string[] args)
 		{
 			TestUmgebung testUmGebung = new TestUmgebung ();
-
 			testUmGebung.doit ();
+			LoggerConfig.Setup ();
+			Menu ();
+		}
 
-			Console.WriteLine ("Test DB erstellung");
+		private static void Menu()
+		{
+			Command c = new Command ("", null, null);
+		
+			while (c.MainCommand != "exit") {
 
+				c = GetCommand ();
+
+				if (c == null) {
+					Log.Warn ("command: null");
+					continue;
+				}
+
+				switch (c.MainCommand) {
+				case "init":
+					InitializeDb ();
+					break;
+				case "createdb":
+					if (!CreateDb ()) {
+						Log.Error ("could not create DB");
+					}
+					break;
+				case "createtable":
+					ParseTables ();
+					InitializeTables ();
+					break;
+				case "readdb":
+					ReadPersonen ();
+					break;
+				case "createperson":
+					if (!CreateTestPerson (Read ())) {
+						Log.Error ("could not create new Person");
+					}
+					break;
+				case "testprimitivlist":
+					TestPrimitivStringList ();
+					break;
+				case "foreigntest":
+					TestForeign ();
+					break;
+				default:
+					Log.Warn ("command:" + c.MainCommand + " not found");
+						break;
+				}
+			}
+		}
+
+		#region UI Methods
+		private static Command GetCommand()
+		{
+			string input = Read ();
+			//Index of the first breake
+			int breakIndex =input.IndexOf (" ");
+			if (breakIndex == -1)
+				return new Command ("null", null, null);
+			//Command
+			string mainCommand = input.Substring (0, breakIndex);
+			if (String.IsNullOrEmpty(mainCommand)) {
+				return new Command ("null", null, null);
+			}
+			return new Command (mainCommand, null, null);
+		}
+
+		private static string Read()
+		{
+			return Console.ReadLine ();
+		}
+		#endregion
+
+		public static void InitializeDb()
+		{
+			Log.Info ("Test DB erstellung");
 			var objects = new List<IEntity> ();
 			objects.Add (new TestEntity());
 			objects.Add (new TestEntity2());
 			objects.Add (new Person ());
-
-			Context context = new Context(new ConnectionInfo()
+			objects.Add (new ForeignKeyTest ());
+			objects.Add (new Telefonnummer ());
+			objects.Add (new KontaktDaten ());
+			context = new Context(new ConnectionInfo()
 			                              {
 				Databasename = "entityTest",
 				User = "appserver",
 				Password = "040123",
 				Servername = "localhost"
 			},objects);
+		}
+
+		private static bool CreateDb()
+		{
+			Log.Info ("Created Database" + context.ConnectionInfo.GetDatabasename());
+			return context.CreateDatabase ();
+		}
 
 
+		private static bool InitializeTables()
+		{
+			Log.Info ("Create Tables on Database:" + context.ConnectionInfo.GetDatabasename ());
+			foreach (var table in context.Tables) {
+				Log.Info ("Table :" + table.TableName);
+			}
+			return context.Create ();
+		}
 
-			List<string> strList = new List<string> ();
-			string hallo = "hallo";
-			string welt = "welt";
-
-			strList.Add (hallo);
-			strList.Add (welt);
-			BaseParser parser = new BaseParser ();
-
-			var re = parser.GenerateTableFromList<string> (strList, "strList", "entityTest");
-
-
+		private static void ParseTables()
+		{
 			context.Parse ();
+		}
 
-			context.CreateDatabase ();
+		private static void TestForeign()
+		{
 
-			context.Create ();
+			Telefonnummer telefon = new Telefonnummer ();
+			telefon.Tel = "04154/70341";
+
+			if (!context.Insert<Telefonnummer> (telefon)) {
+				Log.Error ("could not insert telefonnumber");
+				return;
+			}
+
+			telefon = context.GetTable<Telefonnummer> (typeof(Telefonnummer)).FirstOrDefault(t => t.Tel == "04154/70341");
+
+			KontaktDaten kontaktDaten = new KontaktDaten ();
+			kontaktDaten.Telefonnummer = telefon;
 
 
-			Person person = new Person () {
-				Name = "TestPerson",
-				Nachname = "TestNachName",
-				Gehalt = 2300.34
+			if (!context.Insert<KontaktDaten> (kontaktDaten)) {
+				Log.Error ("could not insert KontaktDaten");
+				return;
+			}
 
-			};
+			kontaktDaten = context.GetTable<KontaktDaten> (typeof(KontaktDaten)).FirstOrDefault(t => t.Telefonnummer.Tel == "04154/70341");
 
-			Person person2 = new Person () {
-				Name = "Jonas",
-				Nachname = "Ahlf",
-				Gehalt = 300.30
-			};
+			Person perso = new Person ();
+			perso.Nachname = "foreign";
+			perso.Name = "Test";
+			perso.Gehalt = 200.234;
+			perso.KontaktDaten = kontaktDaten;
 
-			context.Insert<Person> (person2);
+			if (!context.Insert<Person> (perso)) {
+				Log.Error ("Could not insert person");
+				return;
+			}
 
-			if (context.Insert<Person>(person)) {
-				Console.WriteLine ("Insert successful");
-			} else {
-				Console.WriteLine ("Insert failed");
+			var readPerso = context.GetTable<Person> (typeof(Person)).FirstOrDefault (gnn => (gnn.Gehalt == 200.234) && (gnn.Nachname == "foreign") && (gnn.Name == "Test")); 
+
+			if (readPerso == null) {
+				Log.Error ("Read Perso Object is Null");
+				return;
+			}
+
+			ForeignKeyTest testItem = new ForeignKeyTest ();
+			testItem.MeineTestPerson = readPerso;
+
+			if (!context.Insert<ForeignKeyTest> (testItem)) {
+				Log.Error ("Insert Foreignkeytest failed!");
+				return;
 			}
 
 
-			TestEntity tEntity = new TestEntity () {
-				Name = "PenisKopf"
-			};
+			var readForeignKeyTest = context.GetTable<ForeignKeyTest> (typeof(ForeignKeyTest));
+
+			if (readForeignKeyTest == null) {
+				Log.Error ("ReadList of ForeignKeyTest objects == null");
+				return;
+			}
+
+			foreach (var item in readForeignKeyTest) {
+				Log.Info (item.MeineTestPerson.Nachname);
+			}
+		}
+
+		private static void TestPrimitivStringList()
+		{
+			List<string> strList = new List<string> ();
+			string hallo = "hallo";
+			string welt = "welt";
+			strList.Add (hallo);
+			strList.Add (welt);
+			BaseParser parser = new BaseParser ();
+			var re = parser.GenerateTableFromList<string> (strList, "strList", "entityTest");
+			CreateParser cParser = new CreateParser ();
+			var query = cParser.getSQLQuery (re);
+			Log.Info ("PrimitivList query: " + query.Query); 
+		}
 
 
+		private static bool CreateTestPerson(string name)
+		{
+			Person person = new Person ();
+			person.Name = name;
+			person.Nachname = stringGenerator.Generate (8, 32);
+			person.Gehalt = GetRandomNumber (450.65, 923000.90);
+			Log.Info ("Insert Entity Person :" + person.ToString ());
+			return context.Insert<Person> (person);
+		}
 
-			context.Insert<TestEntity> (tEntity);
+		private static void ReadPersonen()
+		{
+			List<Person> personen = context.GetTable<Person> (typeof(Person));
+			foreach (var person in personen) {
+				Log.Info ("Person :" + person.ToString ());
+			}
+		}
 
-
-			var result = context.GetTable<Person> (typeof(Person)).Where (n => n.Name == "Jonas").ToList ();
-
-
-
-
-			Console.WriteLine (result.Count);
-
-
+		public static double GetRandomNumber(double minimum, double maximum)
+		{ 
+			Random random = new Random();
+			return random.NextDouble() * (maximum - minimum) + minimum;
 		}
 	}
 }

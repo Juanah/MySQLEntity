@@ -6,7 +6,7 @@ namespace Infrastructure
 {
 	public interface IDecoder
 	{
-		object Decode (List<Object> objects,Object parent);
+		object Decode (List<Object> objects,Table table,object context);
 	}
 }
 

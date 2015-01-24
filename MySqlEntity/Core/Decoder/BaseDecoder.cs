@@ -3,30 +3,71 @@ using Infrastructure;
 using System.Collections.Generic;
 using System.Reflection;
 using Common;
+using System.Linq;
 
 
 namespace Core
 {
+	/// <summary>
+	/// Decodes the given SQLData in one Class Object
+	/// </summary>
 	public class BaseDecoder: IDecoder
 	{
-		private static BaseParser mParser = new BaseParser();
 		public BaseDecoder ()
 		{
 		}
 
 		#region IDecoder implementation
-		public object Decode (List<Object> objects,Object parent)
+
+		/// <summary>
+		/// Decodes a given object list into the parent and returns him
+		/// </summary>
+		/// <param name="objects">Objects.</param>
+		/// <param name="parent">Parent.</param>
+		/// object Decode (List<Object> objects,Object parent,object context);
+		public object Decode (List<Object> objects,Table table,object context)
 		{
-			Table table = mParser.getTable (parent,"");
+			object origClone = ((IEntity)table.OriginalObject).DeepCopy ();
 			var counter = 0;
-			foreach (var item in table.Properties) {
-				PropertyInfo prop = parent.GetType().GetProperty(item.PropertyName, BindingFlags.Public | BindingFlags.Instance);
+			foreach (var property in table.Properties) {
+				PropertyInfo prop = origClone.GetType().GetProperty(property.PropertyName, BindingFlags.Public | BindingFlags.Instance);
+
+				object obj = objects [counter];
+
+				if (property.AttributeTyp == AttributeTyp.Foreignkey) {
+
+					int id = (int)objects[counter];
+
+					obj = (object)((Context)context).GetTable<IEntity> (property.ForeignType).FirstOrDefault(i => i.GetId().Equals(id));
+				} 
+
 				if (null != prop && prop.CanWrite) {
-					prop.SetValue (parent, objects [counter]);
+					prop.SetValue (origClone, obj);
 				}
+
 				counter++;
 			}
-			return parent;
+
+			return origClone;
+
+
+
+			/*
+			//TODO Ist das sicher mit dem leeren parameter ?!
+			List<Table> tables = mParser.getTable (parent, "");
+
+			var counter = 0;
+			foreach (var table in tables) {
+				foreach (var item in table.Properties) {
+					PropertyInfo prop = parent.GetType().GetProperty(item.PropertyName, BindingFlags.Public | BindingFlags.Instance);
+					if (null != prop && prop.CanWrite) {
+						prop.SetValue (parent, objects [counter]);
+					}
+					counter++;
+				}
+			}
+
+*/
 		}
 		#endregion
 	}

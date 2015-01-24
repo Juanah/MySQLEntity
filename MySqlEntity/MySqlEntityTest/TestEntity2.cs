@@ -21,7 +21,10 @@ namespace MySqlEntityTest
 		{
 			return (TestEntity2)this.MemberwiseClone ();
 		}
-
+		public int GetId ()
+		{
+			return Id;
+		}
 		#endregion
 	}
 }

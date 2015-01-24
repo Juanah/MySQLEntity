@@ -36,14 +36,30 @@ namespace Core
 						+ property.PropertyName + up
 						+ " " + getType (property) + " NOT NULL";
 					if (table.AUTOINCREMENT) {
-						tableQuery += " AUTO_INCREMENT,";
+						if (table.Properties.IndexOf (property) == (table.Properties.Count - 1)) {
+							tableQuery += " AUTO_INCREMENT,";
+						} else {
+							tableQuery += " AUTO_INCREMENT,";
+						}
 					} else {
 						tableQuery += ",";
 					}
 				} else {
 					tableQuery += " " + up 
 						+ property.PropertyName + up
-							+ " " + getType(property) + " NULL,";
+						+ " " + getType (property);
+
+					if (table.Properties.IndexOf (property) == (table.Properties.Count - 1)) {
+						if (table.PRIMARYKEY != null) {
+							tableQuery += " NULL,";
+						} else {
+							tableQuery += " NULL)";
+						}
+					} else {
+						tableQuery += " NULL,";
+					}
+
+
 				}
 				counter++;
 			}
@@ -51,7 +67,7 @@ namespace Core
 			if (table.PRIMARYKEY != null) {
 				tableQuery += " PRIMARY KEY (" + up + table.PRIMARYKEY.PropertyName + up + "));";
 			} else {
-				tableQuery += ")";
+				//tableQuery += ")";
 			}
 			Console.WriteLine (tableQuery);
 			return tableQuery;
