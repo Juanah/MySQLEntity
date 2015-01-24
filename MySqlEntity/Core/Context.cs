@@ -89,6 +89,29 @@ namespace Core
 			return true;
 		}
 
+		public bool Update<TEntity>(TEntity entity)
+		{
+			List<Table> table = mBaseParser.getTable (entity, ConnectionInfo.GetDatabasename ());
+
+			foreach (var item in table) {
+				SqlQuery query = BaseQueryBuilder.UPDATE (item);
+				if (!Connection.ExecuteQuery (query)) {
+					log.Error ("Update failed:" + query);
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public bool Delete<TEntity>(TEntity entity)
+		{
+			Table table = mBaseParser.getTable (entity, ConnectionInfo.GetDatabasename ()).FirstOrDefault(t => t.State == ETableState.Normal);
+
+			SqlQuery query = BaseQueryBuilder.DELETE (table);
+
+			return Connection.ExecuteQuery (query);
+		}
 
 		public List<TEntity> GetTable<TEntity>(Type type)
 		{

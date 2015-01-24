@@ -15,12 +15,15 @@ namespace MySqlEntityTest
 			this.Data = data;
 		}
 		
+	
 
-
-		public string MainCommand{ get; set; }
-		public List<string> Attributes{ get; set; }
+		public string MainCommand{ get; set;}
+		public List<string> Attributes { 
+			get;
+			set;
+		}
 		public List<string> Data{ get; set; }
-
+		public bool HasAttributes{ get; private set; }
 	}
 }
 

@@ -1,16 +1,19 @@
-﻿2015-01-24 02:52:15,977 [1] INFO  MySqlEntityTest - Test DB erstellung
-2015-01-24 02:52:19,556 [1] INFO  MySqlEntityTest - Created DatabaseentityTest
-2015-01-24 02:52:19,561 [1] INFO  Core.Context - Connection is Null, create one
-2015-01-24 02:52:22,929 [1] INFO  MySqlEntityTest - Create Tables on Database:entityTest
-2015-01-24 02:52:22,929 [1] INFO  MySqlEntityTest - Table :TestEntity
-2015-01-24 02:52:22,930 [1] INFO  MySqlEntityTest - Table :TestEntity2
-2015-01-24 02:52:22,930 [1] INFO  MySqlEntityTest - Table :Person
-2015-01-24 02:52:22,930 [1] INFO  MySqlEntityTest - Table :ForeignKeyTest
-2015-01-24 02:52:22,930 [1] INFO  MySqlEntityTest - Table :Telefonnummer
-2015-01-24 02:52:22,931 [1] INFO  MySqlEntityTest - Table :KontaktDaten
-2015-01-24 02:52:22,943 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`TestEntity`( `Name` VARCHAR(1000) NULL, `ID` INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (`ID`));
-2015-01-24 02:52:22,958 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`TestEntity2`( `Id` INT NOT NULL AUTO_INCREMENT, `Haus` VARCHAR(1000) NULL, PRIMARY KEY (`Id`));
-2015-01-24 02:52:22,983 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`Person`( `Id` INT NOT NULL AUTO_INCREMENT, `Name` VARCHAR(1000) NULL, `Nachname` VARCHAR(1000) NULL, `Gehalt` DOUBLE NULL, `KontaktDaten` INT NULL, PRIMARY KEY (`Id`));
-2015-01-24 02:52:23,015 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`ForeignKeyTest`( `Id` INT NOT NULL AUTO_INCREMENT, `MeineTestPerson` INT NULL, PRIMARY KEY (`Id`));
-2015-01-24 02:52:23,038 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`Telefonnummer`( `Id` INT NOT NULL AUTO_INCREMENT, `Tel` VARCHAR(1000) NULL, PRIMARY KEY (`Id`));
-2015-01-24 02:52:23,065 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`KontaktDaten`( `Id` INT NOT NULL AUTO_INCREMENT, `Telefonnummer` INT NULL, PRIMARY KEY (`Id`));
+﻿2015-01-24 21:05:20,730 [1] INFO  MySqlEntityTest - Test DB erstellung
+2015-01-24 21:05:26,981 [1] INFO  MySqlEntityTest - Created DatabaseentityTest
+2015-01-24 21:05:26,985 [1] INFO  Core.Context - Connection is Null, create one
+2015-01-24 21:05:27,235 [1] INFO  MySqlEntityTest - Create Tables on Database:entityTest
+2015-01-24 21:05:27,236 [1] INFO  MySqlEntityTest - Table :TestEntity
+2015-01-24 21:05:27,236 [1] INFO  MySqlEntityTest - Table :TestEntity2
+2015-01-24 21:05:27,236 [1] INFO  MySqlEntityTest - Table :Person
+2015-01-24 21:05:27,236 [1] INFO  MySqlEntityTest - Table :ForeignKeyTest
+2015-01-24 21:05:27,237 [1] INFO  MySqlEntityTest - Table :Telefonnummer
+2015-01-24 21:05:27,237 [1] INFO  MySqlEntityTest - Table :KontaktDaten
+2015-01-24 21:05:27,251 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`TestEntity`( `Name` VARCHAR(1000) NULL, `ID` INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (`ID`));
+2015-01-24 21:05:27,261 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`TestEntity2`( `Id` INT NOT NULL AUTO_INCREMENT, `Haus` VARCHAR(1000) NULL, PRIMARY KEY (`Id`));
+2015-01-24 21:05:27,280 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`Person`( `Id` INT NOT NULL AUTO_INCREMENT, `Name` VARCHAR(1000) NULL, `Nachname` VARCHAR(1000) NULL, `Gehalt` DOUBLE NULL, `KontaktDaten` INT NULL, PRIMARY KEY (`Id`));
+2015-01-24 21:05:27,299 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`ForeignKeyTest`( `Id` INT NOT NULL AUTO_INCREMENT, `MeineTestPerson` INT NULL, PRIMARY KEY (`Id`));
+2015-01-24 21:05:27,323 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`Telefonnummer`( `Id` INT NOT NULL AUTO_INCREMENT, `Tel` VARCHAR(1000) NULL, PRIMARY KEY (`Id`));
+2015-01-24 21:05:27,350 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`KontaktDaten`( `Id` INT NOT NULL AUTO_INCREMENT, `Telefonnummer` INT NULL, PRIMARY KEY (`Id`));
+2015-01-24 21:05:32,412 [1] INFO  MySqlEntityTest - foreign
+2015-01-24 21:05:35,531 [1] INFO  MySqlEntityTest - Update Successful
+2015-01-24 21:06:02,910 [1] DEBUG MySqlEntityTest - Delete Successfull

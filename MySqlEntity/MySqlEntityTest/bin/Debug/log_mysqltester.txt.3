@@ -1,3 +1,22 @@
-﻿2015-01-24 02:49:32,080 [1] INFO  MySqlEntityTest - Test DB erstellung
-2015-01-24 02:49:36,202 [1] INFO  MySqlEntityTest - Created DatabaseentityTest
-2015-01-24 02:49:36,207 [1] INFO  Core.Context - Connection is Null, create one
+﻿2015-01-24 21:01:50,931 [1] INFO  MySqlEntityTest - Test DB erstellung
+2015-01-24 21:01:53,309 [1] INFO  MySqlEntityTest - Created DatabaseentityTest
+2015-01-24 21:01:53,314 [1] INFO  Core.Context - Connection is Null, create one
+2015-01-24 21:01:53,456 [1] INFO  MySqlEntityTest - Create Tables on Database:entityTest
+2015-01-24 21:01:53,457 [1] INFO  MySqlEntityTest - Table :TestEntity
+2015-01-24 21:01:53,457 [1] INFO  MySqlEntityTest - Table :TestEntity2
+2015-01-24 21:01:53,458 [1] INFO  MySqlEntityTest - Table :Person
+2015-01-24 21:01:53,458 [1] INFO  MySqlEntityTest - Table :ForeignKeyTest
+2015-01-24 21:01:53,458 [1] INFO  MySqlEntityTest - Table :Telefonnummer
+2015-01-24 21:01:53,458 [1] INFO  MySqlEntityTest - Table :KontaktDaten
+2015-01-24 21:01:53,469 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`TestEntity`( `Name` VARCHAR(1000) NULL, `ID` INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (`ID`));
+2015-01-24 21:01:53,489 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`TestEntity2`( `Id` INT NOT NULL AUTO_INCREMENT, `Haus` VARCHAR(1000) NULL, PRIMARY KEY (`Id`));
+2015-01-24 21:01:53,519 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`Person`( `Id` INT NOT NULL AUTO_INCREMENT, `Name` VARCHAR(1000) NULL, `Nachname` VARCHAR(1000) NULL, `Gehalt` DOUBLE NULL, `KontaktDaten` INT NULL, PRIMARY KEY (`Id`));
+2015-01-24 21:01:53,546 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`ForeignKeyTest`( `Id` INT NOT NULL AUTO_INCREMENT, `MeineTestPerson` INT NULL, PRIMARY KEY (`Id`));
+2015-01-24 21:01:53,580 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`Telefonnummer`( `Id` INT NOT NULL AUTO_INCREMENT, `Tel` VARCHAR(1000) NULL, PRIMARY KEY (`Id`));
+2015-01-24 21:01:53,605 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`KontaktDaten`( `Id` INT NOT NULL AUTO_INCREMENT, `Telefonnummer` INT NULL, PRIMARY KEY (`Id`));
+2015-01-24 21:01:59,540 [1] INFO  MySqlEntityTest - foreign
+2015-01-24 21:02:03,630 [1] INFO  MySqlEntityTest - Update Successful
+2015-01-24 21:02:23,316 [1] ERROR Core.Connection - could not Execute Query!MySql.Data.MySqlClient.MySqlException: Unknown column ''1'' in 'where clause'
+  at MySql.Data.MySqlClient.MySqlStream.ReadPacket () [0x00000] in <filename unknown>:0 
+  at MySql.Data.MySqlClient.NativeDriver.GetResult (System.Int32& affectedRow, System.Int64& insertedId) [0x00000] in <filename unknown>:0 
+2015-01-24 21:02:23,317 [1] ERROR MySqlEntityTest - could not delete Entity

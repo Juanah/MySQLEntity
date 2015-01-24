@@ -1,5 +1,8 @@
 using System;
 using Common;
+using Infrastructure;
+
+
 namespace Core
 {
 	public static class BaseQueryBuilder
@@ -23,6 +26,47 @@ namespace Core
 				+ u
 				+ ";";
 			return new SqlQuery (query, false);
+		}
+
+		//Update
+		//UPDATE `entityTest`.`Person` SET `Name`='Test3' WHERE `Id`='1';
+		public static SqlQuery UPDATE(Table table)
+		{
+			string query = "UPDATE "
+				+ u 
+					+ table.DatabaseName
+					+ u
+					+ "."
+					+ u
+					+ table.TableName
+					+ u
+					+ " SET ";
+
+
+			foreach (var property in table.Properties) {
+				if (table.PRIMARYKEY == property) {
+					continue;
+				}
+				query 
+					+= u
+					+ property.PropertyName
+					+ u
+					+ "="
+					+ getValue (property.Value,property.AttributeTyp,true);
+
+
+
+				if (table.Properties.IndexOf (property) == (table.Properties.Count - 1)) {
+					query +=  " WHERE " + u+ table.PRIMARYKEY.PropertyName + u + "=" + "'" + ((int)table.PRIMARYKEY.Value).ToString() + "'" +";";
+				} else {
+					if (table.Properties[table.Properties.IndexOf(property) +1] != table.PRIMARYKEY) {
+						query += ",";
+					}
+				}
+
+			}
+			return new SqlQuery((query),false); 
+
 		}
 
 		/// <summary>
@@ -56,7 +100,7 @@ namespace Core
 					+ property.PropertyName
 					+ u;
 
-				valueStr += getValue (property.Value);
+				valueStr += getValue (property.Value,property.AttributeTyp);
 
 				if (table.Properties.IndexOf (property) == (table.Properties.Count - 1)) {
 					query += ")";
@@ -72,8 +116,44 @@ namespace Core
 			return new SqlQuery((query + valueStr),false); 
 		}
 
-		private static string getValue(object value)
+
+		/// <summary>
+		/// DELET the specified table.
+		/// pattern DELETE FROM `entityTest`.`Person` WHERE `Id`='1';
+		/// </summary>
+		/// <param name="table">Table.</param>
+		public static SqlQuery DELETE(Table table)
 		{
+			string query = "DELETE FROM " 
+				+ u
+				+ table.DatabaseName
+				+ u
+				+ "."
+				+ u
+				+ table.TableName
+				+ u
+				+ " WHERE "
+				+ u
+				+ table.PRIMARYKEY.PropertyName
+				+ u
+				+"="
+				+ "'"
+				+ ((int)table.PRIMARYKEY.Value).ToString()
+				+ "';";
+		return new SqlQuery (query, false);
+		}
+
+		private static string getValue(object value,AttributeTyp atrType,bool update=false)
+		{
+
+			if (atrType == AttributeTyp.Foreignkey) {
+				if (value.GetType() == typeof(int)) {
+					return "'"+ value.ToString () + "'";
+				}
+				IEntity entity = (IEntity)value;
+				return "'" + entity.GetId ().ToString() + "'";
+			}
+
 			string strValue = value.ToString ();
 
 			Type valueType = value.GetType ();
@@ -89,12 +169,22 @@ namespace Core
 
 				var splitValue = strValue.Split(',');
 
+				if (update) {
+					return ("'" + splitValue[0] + "." + splitValue[1] +"'");
+				}
+
 				return (splitValue[0] + "." + splitValue[1]);
 			}else
 			{
+				if (update) {
+					return "'" + strValue + "'";
+
+				}
 				return strValue;
+
 			}
 		}
+
 
 
 		/*SELECT * FROM `entityTest`.`Person`;

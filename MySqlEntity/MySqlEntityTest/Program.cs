@@ -34,7 +34,6 @@ namespace MySqlEntityTest
 					Log.Warn ("command: null");
 					continue;
 				}
-
 				switch (c.MainCommand) {
 				case "init":
 					InitializeDb ();
@@ -43,6 +42,8 @@ namespace MySqlEntityTest
 					if (!CreateDb ()) {
 						Log.Error ("could not create DB");
 					}
+					ParseTables ();
+					InitializeTables ();
 					break;
 				case "createtable":
 					ParseTables ();
@@ -62,6 +63,12 @@ namespace MySqlEntityTest
 				case "foreigntest":
 					TestForeign ();
 					break;
+				case "updatetest":
+					UpdateEntity ();
+					break;
+				case "delete":
+					DeletePerson (Console.ReadLine ());
+					break;
 				default:
 					Log.Warn ("command:" + c.MainCommand + " not found");
 						break;
@@ -73,16 +80,12 @@ namespace MySqlEntityTest
 		private static Command GetCommand()
 		{
 			string input = Read ();
-			//Index of the first breake
-			int breakIndex =input.IndexOf (" ");
-			if (breakIndex == -1)
-				return new Command ("null", null, null);
-			//Command
-			string mainCommand = input.Substring (0, breakIndex);
-			if (String.IsNullOrEmpty(mainCommand)) {
-				return new Command ("null", null, null);
-			}
-			return new Command (mainCommand, null, null);
+
+			if (!String.IsNullOrEmpty (input)) {
+				return new Command (input, null, null);
+			} 
+
+			return new Command ("null", null, null);
 		}
 
 		private static string Read()
@@ -129,6 +132,37 @@ namespace MySqlEntityTest
 		private static void ParseTables()
 		{
 			context.Parse ();
+		}
+
+		private static void DeletePerson(string name)
+		{
+			var person = context.GetTable<Person> (typeof(Person)).FirstOrDefault(n => n.Name == "Hannes");
+
+			if (!context.Delete<Person> (person)) {
+				Log.Error ("could not delete Entity");
+			} else {
+				Log.Debug ("Delete Successfull");
+			}
+		}
+
+		private static void UpdateEntity()
+		{
+			var person = context.GetTable<Person> (typeof(Person)).FirstOrDefault();
+
+			person.Name = "Hannes";
+			if (!context.Update<Person>(person)) {
+				Log.Error ("Could not Update Entity");
+				return;
+			}
+
+			var personRead = context.GetTable<Person> (typeof(Person)).FirstOrDefault(n => n.Name == "Hannes");
+
+			if (personRead != null) {
+				Log.Info ("Update Successful");
+			} else {
+				Log.Warn ("Update Failed");
+			}
+
 		}
 
 		private static void TestForeign()

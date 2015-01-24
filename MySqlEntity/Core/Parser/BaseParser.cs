@@ -32,6 +32,8 @@ namespace Core
 			return GenerateTable ();
 
 		}
+
+
 		/// <summary>
 		/// Generates the table.
 		/// </summary>
