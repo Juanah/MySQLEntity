@@ -1,18 +1,18 @@
-﻿2015-01-24 22:31:04,739 [1] INFO  MySqlEntityTest - Test DB erstellung
-2015-01-24 22:31:07,248 [1] INFO  MySqlEntityTest - Created DatabaseentityTest
-2015-01-24 22:31:07,254 [1] INFO  Core.Context - Connection is Null, create one
-2015-01-24 22:31:07,405 [1] INFO  MySqlEntityTest - Create Tables on Database:entityTest
-2015-01-24 22:31:07,405 [1] INFO  MySqlEntityTest - Table :TestEntity
-2015-01-24 22:31:07,405 [1] INFO  MySqlEntityTest - Table :TestEntity2
-2015-01-24 22:31:07,406 [1] INFO  MySqlEntityTest - Table :Person
-2015-01-24 22:31:07,406 [1] INFO  MySqlEntityTest - Table :ForeignKeyTest
-2015-01-24 22:31:07,406 [1] INFO  MySqlEntityTest - Table :Telefonnummer
-2015-01-24 22:31:07,406 [1] INFO  MySqlEntityTest - Table :KontaktDaten
-2015-01-24 22:31:07,422 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`TestEntity`( `Name` VARCHAR(1000) NULL, `ID` INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (`ID`));
-2015-01-24 22:31:07,438 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`TestEntity2`( `Id` INT NOT NULL AUTO_INCREMENT, `Haus` VARCHAR(1000) NULL, PRIMARY KEY (`Id`));
-2015-01-24 22:31:07,467 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`Person`( `Id` INT NOT NULL AUTO_INCREMENT, `Name` VARCHAR(1000) NULL, `Nachname` VARCHAR(1000) NULL, `Gehalt` DOUBLE NULL, `KontaktDaten` INT NULL, PRIMARY KEY (`Id`));
-2015-01-24 22:31:07,496 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`ForeignKeyTest`( `Id` INT NOT NULL AUTO_INCREMENT, `MeineTestPerson` INT NULL, PRIMARY KEY (`Id`));
-2015-01-24 22:31:07,523 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`Telefonnummer`( `Id` INT NOT NULL AUTO_INCREMENT, `Tel` VARCHAR(1000) NULL, PRIMARY KEY (`Id`));
-2015-01-24 22:31:07,556 [1] INFO  Core.Context - Executing Query:CREATE TABLE `entityTest`.`KontaktDaten`( `Id` INT NOT NULL AUTO_INCREMENT, `Telefonnummer` INT NULL, PRIMARY KEY (`Id`));
-2015-01-24 22:31:15,737 [1] INFO  MySqlEntityTest - foreign
-2015-01-24 22:31:36,581 [1] INFO  MySqlEntityTest - Update Successful
+﻿2015-01-25 03:04:16,305 [1] INFO  MySqlEntityTest - Test DB erstellung
+2015-01-25 03:04:19,308 [1] INFO  MySqlEntityTest - Created DatabaseentityTest
+2015-01-25 03:04:19,313 [1] INFO  Core.Context - Connection is Null, create one
+2015-01-25 03:04:19,475 [1] INFO  MySqlEntityTest - Create Tables on Database:entityTest
+2015-01-25 03:04:19,475 [1] INFO  MySqlEntityTest - Table :TestEntity
+2015-01-25 03:04:19,476 [1] INFO  MySqlEntityTest - Table :TestEntity2
+2015-01-25 03:04:19,476 [1] INFO  MySqlEntityTest - Table :Person
+2015-01-25 03:04:19,476 [1] INFO  MySqlEntityTest - Table :ForeignKeyTest
+2015-01-25 03:04:19,476 [1] INFO  MySqlEntityTest - Table :Telefonnummer
+2015-01-25 03:04:19,476 [1] INFO  MySqlEntityTest - Table :KontaktDaten
+2015-01-25 03:04:19,496 [1] INFO  Core.Context - Executing Query:CREATE TABLE IF NOT EXISTS `entityTest`.`TestEntity`( `Name` VARCHAR(1000) NULL, `ID` INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (`ID`));
+2015-01-25 03:04:19,498 [1] INFO  Core.Context - Executing Query:CREATE TABLE IF NOT EXISTS `entityTest`.`TestEntity2`( `Id` INT NOT NULL AUTO_INCREMENT, `Haus` VARCHAR(1000) NULL, PRIMARY KEY (`Id`));
+2015-01-25 03:04:19,507 [1] INFO  Core.Context - Executing Query:CREATE TABLE IF NOT EXISTS `entityTest`.`Person`( `Id` INT NOT NULL AUTO_INCREMENT, `Name` VARCHAR(1000) NULL, `Nachname` VARCHAR(1000) NULL, `Gehalt` DOUBLE NULL, `KontaktDaten` INT NULL, PRIMARY KEY (`Id`));
+2015-01-25 03:04:19,517 [1] INFO  Core.Context - Executing Query:CREATE TABLE IF NOT EXISTS `entityTest`.`ForeignKeyTest`( `Id` INT NOT NULL AUTO_INCREMENT, `MeineTestPerson` INT NULL, PRIMARY KEY (`Id`));
+2015-01-25 03:04:19,527 [1] INFO  Core.Context - Executing Query:CREATE TABLE IF NOT EXISTS `entityTest`.`Telefonnummer`( `Id` INT NOT NULL AUTO_INCREMENT, `Tel` VARCHAR(1000) NULL, PRIMARY KEY (`Id`));
+2015-01-25 03:04:19,537 [1] INFO  Core.Context - Executing Query:CREATE TABLE IF NOT EXISTS `entityTest`.`KontaktDaten`( `Id` INT NOT NULL AUTO_INCREMENT, `Telefonnummer` INT NULL, PRIMARY KEY (`Id`));
+2015-01-25 03:04:29,066 [1] INFO  MySqlEntityTest - Insert Entity Person :[Person: Id=0, Name=jonas, Nachname=|=u):gydx>Vt:i, Gehalt=692349,355249974]
+2015-01-25 03:05:02,313 [1] INFO  MySqlEntityTest - Person :[Person: Id=2, Name=jonas, Nachname=|=u):gydx>Vt:i, Gehalt=692349,355249974]

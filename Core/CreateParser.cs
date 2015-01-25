@@ -20,9 +20,9 @@ namespace Core
 		/// </summary>
 		/// <returns>The SQL query.</returns>
 		/// <param name="table">Table.</param>
-		public Common.SqlQuery getSQLQuery(Table table)
+		public Common.SqlQuery getSQLQuery(Table table,bool ifNotExists)
 		{
-			SqlQuery query = new SqlQuery (GetTableStr (table),false);
+			SqlQuery query = new SqlQuery (GetTableStr (table,ifNotExists),false);
 			return query;
 		}
 
@@ -31,10 +31,13 @@ namespace Core
 		/// </summary>
 		/// <returns>The table string.</returns>
 		/// <param name="table">Table.</param>
-		private string GetTableStr(Table table)
+		private string GetTableStr(Table table,bool ifNotExists = false)
 		{
 			char up = '`';
 			string tableQuery = "CREATE TABLE ";
+			if (ifNotExists) {
+				tableQuery = "CREATE TABLE IF NOT EXISTS ";
+			}
 			tableQuery += '`' + table.DatabaseName + '`' + ".`" + table.TableName + '`'
 			+ "(";
 			var counter = 0;

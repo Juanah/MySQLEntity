@@ -116,7 +116,7 @@ namespace MySqlEntityTest
 		private static bool CreateDb()
 		{
 			Log.Info ("Created Database" + context.ConnectionInfo.GetDatabasename());
-			return context.CreateDatabase ();
+			return context.CreateDatabase (true);
 		}
 
 
@@ -238,7 +238,7 @@ namespace MySqlEntityTest
 			BaseParser parser = new BaseParser ();
 			var re = parser.GenerateTableFromList<string> (strList, "strList", "entityTest");
 			CreateParser cParser = new CreateParser ();
-			var query = cParser.getSQLQuery (re);
+			var query = cParser.getSQLQuery (re,false);
 			Log.Info ("PrimitivList query: " + query.Query); 
 		}
 

@@ -8,7 +8,7 @@ namespace Infrastructure.Core
 
 
 
-		SqlQuery getSQLQuery(Table table);
+		SqlQuery getSQLQuery(Table table,bool exists);
 
 	}
 }

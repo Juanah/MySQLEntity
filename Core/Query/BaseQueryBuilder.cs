@@ -143,6 +143,9 @@ namespace Core
 		{
 
 			if (atrType == AttributeTyp.Foreignkey) {
+				if (value == null) {
+					return "'-1'";
+				}
 				if (value.GetType() == typeof(int)) {
 					return "'"+ value.ToString () + "'";
 				}

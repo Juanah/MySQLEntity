@@ -53,11 +53,14 @@ namespace Core
 		/// Creates the database.
 		/// </summary>
 		/// <returns><c>true</c>, if database was created, <c>false</c> otherwise.</returns>
-		public virtual bool CreateDatabase()
+		public virtual bool CreateDatabase(bool ifNotExists=false)
 		{
 			if (Connection == null) {
 				log.Info ("Connection is Null, create one");
 				Connection = new Connection (this.ConnectionInfo);
+			}
+			if (ifNotExists) {
+				return Connection.ExecuteQuery (new SqlQuery ("CREATE SCHEMA IF NOT EXISTS `" + ConnectionInfo.GetDatabasename() + "`", false));
 			}
 			return Connection.ExecuteQuery (new SqlQuery ("CREATE SCHEMA `" + ConnectionInfo.GetDatabasename() + "`", false));
 		}
@@ -72,7 +75,7 @@ namespace Core
 			List<SqlQuery> queries = new List<SqlQuery> ();
 
 			foreach (var table in Tables) {
-				queries.Add (createParser.getSQLQuery (table));
+				queries.Add (createParser.getSQLQuery (table,true));
 			}
 
 			Connection = new Connection (this.ConnectionInfo);
