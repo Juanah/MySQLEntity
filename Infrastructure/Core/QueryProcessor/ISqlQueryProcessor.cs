@@ -1,5 +1,6 @@
 using System;
 using Common;
+using System.Collections.Generic;
 
 namespace Infrastructure
 {
@@ -8,6 +9,8 @@ namespace Infrastructure
 	/// </summary>
 	public interface ISqlQueryProcessor
 	{
+		bool CreateDatabase ();
+
 		bool Update(Table table);
 
 		bool Insert(Table table);
@@ -15,6 +18,8 @@ namespace Infrastructure
 		bool Create(Table table);
 
 		bool Delete(Table table);
+
+		List<List<Object>> GetTable(Table table);
 	}
 }
 

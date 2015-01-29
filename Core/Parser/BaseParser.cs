@@ -126,7 +126,7 @@ namespace Core
 			var properties = new List<Property> ();
 			foreach (var item in list) {
 				string columnName = name + (list.IndexOf (item).ToString());
-				properties.Add (new Property(columnName,item.GetType(),item));
+				properties.Add (new Property(columnName,item.GetType(),item,AttributeTyp.PrimitvList));
 			}
 			table.Properties = properties;
 			table.DatabaseName = databasename;

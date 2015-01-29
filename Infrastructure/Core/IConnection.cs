@@ -16,7 +16,7 @@ namespace Infrastructure
 
 		object GetDbConnection (); 
 		
-		List<List<Object>> ExecuteReaderQuery (Common.SqlQuery query, int columns);
+		//List<List<Object>> ExecuteReaderQuery (Common.SqlQuery query, int columns);
 
 	}
 }

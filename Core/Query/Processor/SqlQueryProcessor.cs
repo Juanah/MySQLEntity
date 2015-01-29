@@ -1,7 +1,9 @@
 using System;
 using Infrastructure;
+using Infrastructure.Core;
 using Common;
 using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 
 namespace Core
 {
@@ -11,16 +13,33 @@ namespace Core
 	public class SqlQueryProcessor: ISqlQueryProcessor 
 	{
 		private IConnection _connection;
+		private IDBConnectionInfo _connectionInfo;
+
+
 		private static string u = "`";
-		public SqlQueryProcessor (Infrastructure.IConnection _connection)
+		public SqlQueryProcessor (IConnection _connection,IDBConnectionInfo connectionInfo)
 		{
 			if (_connection == null) {
-				throw new ArgumentNullException ("_connection");
+				throw new ArgumentNullException ("IConnection");
+			}
+			if (connectionInfo == null) {
+				throw new ArgumentNullException ("IDBConnectionInfo");
 			}
 			this._connection = _connection;
+			this._connectionInfo = connectionInfo;
 		}
 
 		#region ISqlQueryProcessor implementation
+
+		public bool CreateDatabase ()
+		{
+			var command = CreateCommand ();
+			command.CommandText = "CREATE SCHEMA IF NOT EXISTS `" + _connectionInfo.GetDatabasename () + "`";
+			if (command.ExecuteNonQuery () < 1) {
+				return false;
+			}
+			return true;
+		}
 
 		public bool Update (Table table)
 		{
@@ -204,6 +223,38 @@ namespace Core
 			}
 		}
 
+		public System.Collections.Generic.List<System.Collections.Generic.List<object>> GetTable (Table table)
+		{
+			int columns = table.Properties.Count;
+			string query = "SELECT * FROM`" + table.DatabaseName + "`.`" + table.TableName + "`;";
+			MySqlCommand command = CreateCommand ();
+			command.CommandText = query;
+			MySqlDataReader reader = command.ExecuteReader();
+
+			//0=Row1=columnValues
+			List<List<object>> list = new List<List<object>>();
+
+			while (reader.Read()) {
+				List<object> tempObjectList = new List<object>();
+
+				for (int i = 0; i < columns; i++) {
+					tempObjectList.Add(reader[i]);
+				}
+				list.Add(tempObjectList);
+			}
+			return list;
+		}
+		/*string query = "SELECT * FROM"
+				+ u 
+				+ table.DatabaseName
+				+ u
+				+ "."
+				+ u
+				+ table.TableName
+				+ u
+				+ ";";
+
+		*/
 		#endregion
 
 		private bool Automaticreconnect()
@@ -213,7 +264,7 @@ namespace Core
 					_connection.Close();
 					System.Threading.Thread.Sleep(200);
 					return _connection.Open();
-				} catch (Exception ex) {
+				} catch (Exception) {
 					return false;
 				}
 			}
@@ -245,6 +296,8 @@ namespace Core
 					+ "';";
 			return query;
 		}
+
+
 
 		private MySqlCommand CreateCommand()
 		{

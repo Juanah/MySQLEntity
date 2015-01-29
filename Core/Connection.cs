@@ -16,7 +16,6 @@ namespace Core
 	{
 
 		private ILog log = LogManager.GetLogger (typeof(Connection));
-		private static MySqlCommand _mySqlCommand = null;
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Core.Connection"/> class.
 		/// </summary>
@@ -71,15 +70,11 @@ namespace Core
 			}
 		}
 
-		public List<List<object>> ExecuteReaderQuery (SqlQuery query, int columns)
-		{
-			throw new NotImplementedException ();
-		}
-
 		public object GetDbConnection ()
 		{
 			return this.DbConnection;
 		}
+
 
 		#endregion
 

@@ -6,14 +6,13 @@ using Microsoft.Practices.Prism.Modularity;
 using Infrastructure;
 using Microsoft.Practices.Unity;
 using Infrastructure.Core;
+using System.Collections.Generic;
 
 
 namespace Core
 {
-	[Obsolete()]
 	public class CoreBootstrapper: UnityBootstrapper 
 	{
-		ILog Log = LogManager.GetLogger (typeof(CoreBootstrapper));
 
 		private IDBConnectionInfo _info;
 		private IConnection _connection;
@@ -28,8 +27,6 @@ namespace Core
 		protected override void ConfigureModuleCatalog ()
 		{
 			base.ConfigureModuleCatalog ();
-			ModuleCatalog moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
-			moduleCatalog.AddModule (typeof(CoreModul));
 		}
 
 		protected override void ConfigureContainer ()
@@ -40,8 +37,10 @@ namespace Core
 			 * 
 			 * */
 			_connection = new Connection (_info);
+			this.Container.RegisterInstance<IDBConnectionInfo>(_info, new ContainerControlledLifetimeManager ());
 			this.Container.RegisterInstance<IConnection> (_connection, new ContainerControlledLifetimeManager ());
 			this.Container.RegisterType<ISqlQueryProcessor,SqlQueryProcessor> (new ContainerControlledLifetimeManager ());
+			this.Container.RegisterType<IClassParser,BaseParser>(new ContainerControlledLifetimeManager ());
 			base.ConfigureContainer ();
 		}
 

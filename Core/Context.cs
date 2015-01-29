@@ -16,16 +16,20 @@ namespace Core
 		ILog log = log4net.LogManager.GetLogger
 			(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType); 
 		private static IClassParser _baseParser;
+		private static ISqlQueryProcessor _sqlprocessor;
 
-
-		public Context(IClassParser parser,List<IEntity> entities)
+		public Context(IClassParser parser,ISqlQueryProcessor processor)
 		{
 			if (parser == null) {
 				throw new ArgumentNullException ("parser");
 			}
+			if (processor == null) {
+				throw new ArgumentNullException ("processor");
+			}
+			_baseParser = parser;
+			_sqlprocessor = processor;
 			this.Tables = new List<Table> ();
 			this.mDecoder = new BaseDecoder ();
-			this.Entities = entities;
 			LoggerConfig.Setup ();
 		}
 
@@ -35,14 +39,7 @@ namespace Core
 		/// <returns><c>true</c>, if database was created, <c>false</c> otherwise.</returns>
 		public virtual bool CreateDatabase(bool ifNotExists=false)
 		{
-			if (Connection == null) {
-				log.Info ("Connection is Null, create one");
-				Connection = new Connection (this.ConnectionInfo);
-			}
-			if (ifNotExists) {
-				return Connection.ExecuteQuery (new SqlQuery ("CREATE SCHEMA IF NOT EXISTS `" + ConnectionInfo.GetDatabasename() + "`", false));
-			}
-			return Connection.ExecuteQuery (new SqlQuery ("CREATE SCHEMA `" + ConnectionInfo.GetDatabasename() + "`", false));
+			return _sqlprocessor.CreateDatabase ();
 		}
 
 		/// <summary>
@@ -50,24 +47,9 @@ namespace Core
 		/// </summary>
 		public virtual bool Create()
 		{
-			CreateParser createParser = new CreateParser ();
-
-			List<SqlQuery> queries = new List<SqlQuery> ();
 
 			foreach (var table in Tables) {
-				queries.Add (createParser.getSQLQuery (table,true));
-			}
-
-			Connection = new Connection (this.ConnectionInfo);
-			if (!Connection.Open()) {
-				log.Error ("could not open Database connection");
-				return false;
-			}
-
-			foreach (var item in queries) {
-				log.Info ("Executing Query:" + item.Query);
-				if (!Connection.ExecuteQuery (item)) {
-					log.Error ("could not Execute Query:" + item.Query + "Error Level:" + item.Error);
+				if (!_sqlprocessor.Create (table)) {
 					return false;
 				}
 			}
@@ -81,13 +63,11 @@ namespace Core
 		/// <typeparam name="TEntity">The 1st type parameter.</typeparam>
 		public bool Insert<TEntity>(TEntity entity)
 		{
-			List<Table> table = _baseParser.getTable (entity, ConnectionInfo.GetDatabasename ());
 
-			foreach (var item in table) {
-				SqlQuery query = BaseQueryBuilder.INSERT (item);
+			List<Table> tables = _baseParser.getTable (entity, ConnectionInfo.GetDatabasename ());
 
-				if (!Connection.ExecuteQuery (query)) {
-					log.Error ("Inserst failed:" + query);
+			foreach (var table in tables) {
+				if (!_sqlprocessor.Insert (table)) {
 					return false;
 				}
 			}
@@ -101,12 +81,10 @@ namespace Core
 		/// <typeparam name="TEntity">The 1st type parameter.</typeparam>
 		public bool Update<TEntity>(TEntity entity)
 		{
-			List<Table> table = _baseParser.getTable (entity, ConnectionInfo.GetDatabasename ());
+			List<Table> tables = _baseParser.getTable (entity, ConnectionInfo.GetDatabasename ());
 
-			foreach (var item in table) {
-				SqlQuery query = BaseQueryBuilder.UPDATE (item);
-				if (!Connection.ExecuteQuery (query)) {
-					log.Error ("Update failed:" + query);
+			foreach (var table in tables) {
+				if (!_sqlprocessor.Update (table)) {
 					return false;
 				}
 			}
@@ -122,9 +100,7 @@ namespace Core
 		{
 			Table table = _baseParser.getTable (entity, ConnectionInfo.GetDatabasename ()).FirstOrDefault(t => t.State == ETableState.Normal);
 
-			SqlQuery query = BaseQueryBuilder.DELETE (table);
-
-			return Connection.ExecuteQuery (query);
+			return _sqlprocessor.Delete (table);
 		}
 
 		/// <summary>
@@ -145,15 +121,12 @@ namespace Core
 				log.Error("table null referenz");
 				throw new ArgumentNullException("table","is Null");
 			}
-			SqlQuery query = BaseQueryBuilder.GetTables (table);
-
-			var result = Connection.ExecuteReaderQuery (query, table.Properties.Count);
+			var result = _sqlprocessor.GetTable (table);//Connection.ExecuteReaderQuery (query, table.Properties.Count);
 
 			foreach (var array in result) {
 				var convertedObject = mDecoder.Decode (array, table, this); //(array, clone);
 				objects.Add ((TEntity)convertedObject);
 			}
-
 			return objects;
 		}
 		/// <summary>
