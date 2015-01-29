@@ -104,13 +104,14 @@ namespace MySqlEntityTest
 			objects.Add (new ForeignKeyTest ());
 			objects.Add (new Telefonnummer ());
 			objects.Add (new KontaktDaten ());
-			context = new Context(new ConnectionInfo()
+			/*context = new Context(new ConnectionInfo()
 			                              {
 				Databasename = "entityTest",
 				User = "appserver",
 				Password = "040123",
 				Servername = "localhost"
 			},objects);
+*/
 		}
 
 		private static bool CreateDb()
@@ -230,6 +231,7 @@ namespace MySqlEntityTest
 
 		private static void TestPrimitivStringList()
 		{
+			/*
 			List<string> strList = new List<string> ();
 			string hallo = "hallo";
 			string welt = "welt";
@@ -240,6 +242,7 @@ namespace MySqlEntityTest
 			CreateParser cParser = new CreateParser ();
 			var query = cParser.getSQLQuery (re,false);
 			Log.Info ("PrimitivList query: " + query.Query); 
+			*/
 		}
 
 

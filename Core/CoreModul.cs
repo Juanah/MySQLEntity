@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
+using Infrastructure;
 
 namespace Core
 {
@@ -16,7 +17,7 @@ namespace Core
 
 		public void Initialize ()
 		{
-			//mContainer.RegisterType<
+
 		}
 
 

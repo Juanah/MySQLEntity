@@ -15,40 +15,20 @@ namespace Core
 	{
 		ILog log = log4net.LogManager.GetLogger
 			(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType); 
+		private static IClassParser _baseParser;
 
-		private static BaseParser mBaseParser = new BaseParser();
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Core.Context"/> class.
-		/// </summary>
-		public Context ()
+		public Context(IClassParser parser,List<IEntity> entities)
 		{
+			if (parser == null) {
+				throw new ArgumentNullException ("parser");
+			}
 			this.Tables = new List<Table> ();
 			this.mDecoder = new BaseDecoder ();
+			this.Entities = entities;
 			LoggerConfig.Setup ();
 		}
-		
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Core.Context"/> class.
-		/// </summary>
-		/// <param name="info">Info.</param>
-		public Context (IDBConnectionInfo info)
-		{
-			this.ConnectionInfo = info;
-			this.Tables = new List<Table> ();
-		}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Core.Context"/> class.
-		/// </summary>
-		/// <param name="info">Info.</param>
-		/// <param name="entities">Entities.</param>
-		public Context (IDBConnectionInfo info,List<IEntity> entities)
-		{
-			this.Entities = entities;
-			this.ConnectionInfo = info;
-			this.Tables = new List<Table> ();
-		}
 		/// <summary>
 		/// Creates the database.
 		/// </summary>
@@ -101,7 +81,7 @@ namespace Core
 		/// <typeparam name="TEntity">The 1st type parameter.</typeparam>
 		public bool Insert<TEntity>(TEntity entity)
 		{
-			List<Table> table = mBaseParser.getTable (entity, ConnectionInfo.GetDatabasename ());
+			List<Table> table = _baseParser.getTable (entity, ConnectionInfo.GetDatabasename ());
 
 			foreach (var item in table) {
 				SqlQuery query = BaseQueryBuilder.INSERT (item);
@@ -121,7 +101,7 @@ namespace Core
 		/// <typeparam name="TEntity">The 1st type parameter.</typeparam>
 		public bool Update<TEntity>(TEntity entity)
 		{
-			List<Table> table = mBaseParser.getTable (entity, ConnectionInfo.GetDatabasename ());
+			List<Table> table = _baseParser.getTable (entity, ConnectionInfo.GetDatabasename ());
 
 			foreach (var item in table) {
 				SqlQuery query = BaseQueryBuilder.UPDATE (item);
@@ -140,7 +120,7 @@ namespace Core
 		/// <typeparam name="TEntity">The 1st type parameter.</typeparam>
 		public bool Delete<TEntity>(TEntity entity)
 		{
-			Table table = mBaseParser.getTable (entity, ConnectionInfo.GetDatabasename ()).FirstOrDefault(t => t.State == ETableState.Normal);
+			Table table = _baseParser.getTable (entity, ConnectionInfo.GetDatabasename ()).FirstOrDefault(t => t.State == ETableState.Normal);
 
 			SqlQuery query = BaseQueryBuilder.DELETE (table);
 
@@ -181,10 +161,8 @@ namespace Core
 		/// </summary>
 		public virtual void Parse()
 		{
-			BaseParser rawPaser = new BaseParser ();
-
 			foreach (var entity in Entities) {
-				Tables.AddRange (rawPaser.getTable (entity,ConnectionInfo.GetDatabasename()));
+				Tables.AddRange (_baseParser.getTable (entity,ConnectionInfo.GetDatabasename()));
 			}
 		}
 

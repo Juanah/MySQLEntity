@@ -88,6 +88,8 @@
     <Compile Include="Decoder\PrimitivListDecoder.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="CoreBootstrapper.cs" />
+    <Compile Include="Query\Processor\SqlQueryProcessor.cs" />
+    <Compile Include="Table\TablePrimer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -106,6 +108,8 @@
     <Folder Include="Log\" />
     <Folder Include="Query\" />
     <Folder Include="Util\" />
+    <Folder Include="Query\Processor\" />
+    <Folder Include="Table\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

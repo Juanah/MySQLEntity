@@ -14,28 +14,36 @@ namespace Core
 	/// </summary>
 	public class BaseParser:IClassParser
 	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Core.BaseParser"/> class.
-		/// </summary>
-		public BaseParser ()
+
+		private IDBConnectionInfo _connectionInfo;
+
+		public BaseParser (IDBConnectionInfo _connectionInfo)
 		{
+			this._connectionInfo = _connectionInfo;
 		}
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Core.BaseParser"/> class.
-		/// </summary>
-		/// <param name="dbName">Db name.</param>
-		public BaseParser (string dbName)
-		{
-		}
+
 		/// <summary>
 		/// Gets the table.
 		/// </summary>
 		/// <returns>A bunch of tables wich can be executed by sql</returns>
 		/// <param name="obj">Object. Any class with properties</param>
+		[Obsolete("cause Unity")]
 		public List<Table> getTable (object obj,string databasename)
 		{
 			this.ClassObject = obj;
 			this.mDbname = databasename;
+			return GenerateTable ();
+		}
+
+		/// <summary>
+		/// Gets the tables.
+		/// </summary>
+		/// <returns>The table.</returns>
+		/// <param name="obj">Object.</param>
+		public List<Table> getTable (object obj)
+		{
+			this.ClassObject = obj;
+			this.mDbname = _connectionInfo.GetDatabasename();
 			return GenerateTable ();
 		}
 

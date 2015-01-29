@@ -5,6 +5,7 @@ using MySql.Data.MySqlClient;
 using Infrastructure;
 using log4net;
 using System.Collections.Generic;
+using Common;
 
 namespace Core
 {
@@ -14,7 +15,8 @@ namespace Core
 	public class Connection: IConnection
 	{
 
-		ILog log = LogManager.GetLogger (typeof(Connection));
+		private ILog log = LogManager.GetLogger (typeof(Connection));
+		private static MySqlCommand _mySqlCommand = null;
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Core.Connection"/> class.
 		/// </summary>
@@ -27,6 +29,20 @@ namespace Core
 		}
 
 		#region IConnection implementation
+
+		public bool isOpen ()
+		{
+			ConnectionState state = this.DbConnection.State;
+			if (state == ConnectionState.Open) {
+				return true;
+			}
+			return false;
+		}
+
+		public bool ExecuteQuery (SqlQuery query)
+		{
+			throw new NotImplementedException ();
+		}
 		/// <summary>
 		/// Open the Databaseconnection.
 		/// </summary>
@@ -54,74 +70,20 @@ namespace Core
 				return false;
 			}
 		}
-		/// <summary>
-		/// Executes the query.
-		/// </summary>
-		/// <returns><c>true</c>, if query was executed, <c>false</c> otherwise.</returns>
-		/// <param name="query">Query.</param>
-		public bool ExecuteQuery (Common.SqlQuery query)
+
+		public List<List<object>> ExecuteReaderQuery (SqlQuery query, int columns)
 		{
-			try {
-				if (this.DbConnection.State != ConnectionState.Open) {
-					if(!Open())
-					{
-						throw new NotSupportedException();
-					}
-				}
-				using (MySqlCommand command = new MySqlCommand (query.Query, (MySqlConnection)DbConnection)) {
-					command.ExecuteNonQuery ();
-				}
-
-				Close();
-
-				return true;
-
-			} catch (Exception ex) {
-				log.Error ("could not Execute Query!" + ex);
-				return false;
-			}
+			throw new NotImplementedException ();
 		}
 
-		/// <summary>
-		/// Executes the reader query.
-		/// </summary>
-		/// <returns>The reader query.</returns>
-		/// <param name="query">Query.</param>
-		/// <param name="columns">Columns.</param>
-		public List<List<Object>> ExecuteReaderQuery(Common.SqlQuery query,int columns)
+		public object GetDbConnection ()
 		{
-			try {
-				if (this.DbConnection.State != ConnectionState.Open) {
-					if(!Open())
-					{
-						throw new NotSupportedException();
-					}
-				}
-				MySqlCommand command = new MySqlCommand (query.Query, (MySqlConnection)DbConnection);
-				MySqlDataReader reader = command.ExecuteReader();
-				//0=Row1=columnValues
-				List<List<object>> list = new List<List<object>>();
-
-				while (reader.Read()) {
-					List<object> tempObjectList = new List<object>();
-
-					for (int i = 0; i < columns; i++) {
-						tempObjectList.Add(reader[i]);
-					}
-					list.Add(tempObjectList);
-				}
-				Close();
-				return list;
-
-			} catch (Exception ex) {
-				log.Error ("could not Execute Query!" + ex);
-				return null;
-			}
+			return this.DbConnection;
 		}
-
-
 
 		#endregion
+
+
 		/// <summary>
 		/// Gets or sets the db connection.
 		/// </summary>

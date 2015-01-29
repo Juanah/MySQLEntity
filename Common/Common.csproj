@@ -40,6 +40,7 @@
     <Compile Include="Entity\Property.cs" />
     <Compile Include="Enums\AttributeTyp.cs" />
     <Compile Include="Enums\ETableState.cs" />
+    <Compile Include="Enums\SQLCommand.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
