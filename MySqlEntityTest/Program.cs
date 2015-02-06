@@ -114,14 +114,14 @@ namespace MySqlEntityTest
 */
 		}
 
-		private static bool CreateDb()
+		static bool CreateDb()
 		{
 			Log.Info ("Created Database" + context.ConnectionInfo.GetDatabasename());
 			return context.CreateDatabase (true);
 		}
 
 
-		private static bool InitializeTables()
+		 static bool InitializeTables()
 		{
 			Log.Info ("Create Tables on Database:" + context.ConnectionInfo.GetDatabasename ());
 			foreach (var table in context.Tables) {
@@ -130,7 +130,7 @@ namespace MySqlEntityTest
 			return context.Create ();
 		}
 
-		private static void ParseTables()
+		 static void ParseTables()
 		{
 			context.Parse ();
 		}

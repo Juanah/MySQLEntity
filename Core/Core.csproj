@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E27E642E-A49B-4E8C-95FC-224D1B2FEF81}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -66,12 +66,12 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
-    <Reference Include="MySql.Data">
-      <HintPath>..\..\libs\mysql-connector-net-6.9.5-noinstall\v4.5\MySql.Data.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\bin\Debug\MySql.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

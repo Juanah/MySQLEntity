@@ -43,7 +43,7 @@ namespace Core
 		}
 
 		/// <summary>
-		/// Create this instance.
+		/// Creates the Tables
 		/// </summary>
 		public virtual bool Create()
 		{
@@ -130,7 +130,7 @@ namespace Core
 			return objects;
 		}
 		/// <summary>
-		/// Parse this instance.
+		/// Parses the Tables.
 		/// </summary>
 		public virtual void Parse()
 		{

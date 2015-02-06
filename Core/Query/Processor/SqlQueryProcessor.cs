@@ -303,6 +303,11 @@ namespace Core
 		{
 			var command = new MySqlCommand ();
 			command.Connection = (MySqlConnection)_connection.GetDbConnection();
+			if (!_connection.isOpen ()) {
+				if (!_connection.Open ()) {
+					throw new Exception ("could not open dbConnection");
+				}
+			}
 			return command;
 		}
 

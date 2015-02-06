@@ -5,17 +5,17 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A60843ED-EFFA-4BD9-AE49-941C997814D1}</ProjectGuid>
+    <ProjectGuid>{A823AD89-C3FD-47DB-B99D-6B0DCFE82A71}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MySqlEntityTest</RootNamespace>
-    <AssemblyName>MySqlEntityTest</AssemblyName>
+    <RootNamespace>DITest</RootNamespace>
+    <AssemblyName>DITest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug</OutputPath>
+    <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -24,40 +24,22 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release</OutputPath>
+    <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestEntity.cs" />
-    <Compile Include="TestEntity2.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="TestUmgebung.cs" />
-    <Compile Include="RandomStringGenerator.cs" />
-    <Compile Include="Log\LoggerConfig.cs" />
-    <Compile Include="Command.cs" />
-    <Compile Include="Commands\Enums\EGlobalCommand.cs" />
-    <Compile Include="Commands\EnumHelper.cs" />
-    <Compile Include="ForeignKeyTest.cs" />
-    <Compile Include="KontaktDaten.cs" />
-    <Compile Include="KontaktItems\Telefonnummer.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Kunde.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{F803F296-4BC5-4F97-AB55-A2AF8D0972CA}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{E27E642E-A49B-4E8C-95FC-224D1B2FEF81}</Project>
       <Name>Core</Name>
@@ -68,11 +50,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Commands\Enums\" />
-    <Folder Include="KontaktItems\" />
+    <Folder Include="Entities\" />
   </ItemGroup>
 </Project>
