@@ -6,7 +6,7 @@ using Infrastructure;
 using System.Linq;
 using log4net;
 
-namespace MySqlEntityTest
+namespace DITest
 {
 	class MainClass
 	{

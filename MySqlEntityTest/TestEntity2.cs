@@ -1,7 +1,7 @@
 using System;
 using Infrastructure;
 
-namespace MySqlEntityTest
+namespace DITest
 {
 	public class TestEntity2:IEntity
 	{

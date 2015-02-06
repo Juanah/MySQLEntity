@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace MySqlEntityTest
+namespace DITest
 {
 	public class TestUmgebung
 	{

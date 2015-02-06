@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MySqlEntityTest
+namespace DITest
 {
 	public class Command
 	{

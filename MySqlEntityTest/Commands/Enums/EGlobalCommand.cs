@@ -1,6 +1,6 @@
 using System;
 
-namespace MySqlEntityTest
+namespace DITest
 {
 	public enum EGlobalCommand
 	{

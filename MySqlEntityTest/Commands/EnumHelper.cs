@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using log4net;
-namespace MySqlEntityTest
+namespace DITest
 {
 	public static class EnumHelper
 	{

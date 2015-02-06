@@ -18,7 +18,7 @@ namespace Core
 		private static IClassParser _baseParser;
 		private static ISqlQueryProcessor _sqlprocessor;
 
-		public Context(IClassParser parser,ISqlQueryProcessor processor)
+		public Context(IClassParser parser,ISqlQueryProcessor processor,IDBConnectionInfo connectionInfo)
 		{
 			if (parser == null) {
 				throw new ArgumentNullException ("parser");
@@ -31,6 +31,7 @@ namespace Core
 			this.Tables = new List<Table> ();
 			this.mDecoder = new BaseDecoder ();
 			LoggerConfig.Setup ();
+			this.ConnectionInfo = connectionInfo;
 		}
 
 		/// <summary>

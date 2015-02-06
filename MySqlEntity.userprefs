@@ -1,18 +1,13 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupItem="DITest\DITest.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Core\Query\Processor\SqlQueryProcessor.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Core\Connection.cs">
     <Files>
-      <File FileName="DITest\Program.cs" Line="3" Column="3" />
-      <File FileName="DITest\Entities\BaseEntity.cs" Line="14" Column="14" />
-      <File FileName="DITest\Entities\Kunde.cs" Line="1" Column="1" />
-      <File FileName="Core\Context.cs" Line="25" Column="25" />
-      <File FileName="Core\Query\Processor\SqlQueryProcessor.cs" Line="5" Column="5" />
+      <File FileName="MySqlEntityTest\Program.cs" Line="41" Column="41" />
+      <File FileName="Core\Connection.cs" Line="25" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="C:\Users\Jonas\Documents\Git\Juanah\MySQLEntity\Core\Query\Processor\SqlQueryProcessor.cs" line="37" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <AuthorInfo Name="jonas Ahlf" Email="source@juanah.de" Copyright="jonas" Company="Juanah" Trademark="Juanah(c)" />

@@ -88,7 +88,7 @@ namespace Core
 				return false;
 			}
 			var mysqlCommand = CreateCommand ();
-			var sqlQuery = "INSERT INTO `" + table.DatabaseName + "`.`" + table.TableName + "`"; 
+			var sqlQuery = "INSERT INTO `" + table.DatabaseName + "`.`" + table.TableName + "` VALUES("; 
 
 			bool isLast = false;
 			foreach (var property in table.Properties) {
@@ -202,10 +202,7 @@ namespace Core
 			var mysqlCommand = CreateCommand ();
 			var sqlQuery = GetTableStr (table, true);
 			mysqlCommand.CommandText = sqlQuery;
-			if(mysqlCommand.ExecuteNonQuery () < 1)
-			{
-				return false;
-			}
+			mysqlCommand.ExecuteNonQuery ();
 			return true;
 		}
 
@@ -214,13 +211,8 @@ namespace Core
 			MySqlCommand command = CreateCommand ();
 			command.CommandText = DELETE (table);
 
-			if(command.ExecuteNonQuery() < 1)
-			{
-				return false;
-			}else
-			{
-				return true;
-			}
+			command.ExecuteNonQuery (); //Bug from MysqlConnector it does not return affectedRows
+			return true;
 		}
 
 		public System.Collections.Generic.List<System.Collections.Generic.List<object>> GetTable (Table table)
@@ -305,7 +297,7 @@ namespace Core
 			command.Connection = (MySqlConnection)_connection.GetDbConnection();
 			if (!_connection.isOpen ()) {
 				if (!_connection.Open ()) {
-					throw new Exception ("could not open dbConnection");
+					//throw new Exception ("could not open dbConnection");
 				}
 			}
 			return command;

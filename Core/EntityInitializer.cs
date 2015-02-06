@@ -23,7 +23,8 @@ namespace Core
 
 			Context context = new Context (
 				ServiceLocator.Current.GetInstance<IClassParser> (),
-				ServiceLocator.Current.GetInstance<ISqlQueryProcessor> ()
+				ServiceLocator.Current.GetInstance<ISqlQueryProcessor> (),
+				_connectionInfo
 				);
 			context.Entities = entities;
 			return context;
