@@ -13,8 +13,8 @@ namespace DITest
 			Console.WriteLine ("Entity test with DI-Container");
 			IDBConnectionInfo connectionInfo = new ConnectionInfo () {
 				Databasename = "TestDBDI",
-				User = "root",
-				Password = "",
+				User = "appserver",
+				Password = "123",
 				Servername = "localhost"
 			};
 			EntityInitializer initializer = new EntityInitializer (connectionInfo);
