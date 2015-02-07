@@ -234,19 +234,9 @@ namespace Core
 				}
 				list.Add(tempObjectList);
 			}
+			reader.Close ();
 			return list;
 		}
-		/*string query = "SELECT * FROM"
-				+ u 
-				+ table.DatabaseName
-				+ u
-				+ "."
-				+ u
-				+ table.TableName
-				+ u
-				+ ";";
-
-		*/
 		#endregion
 
 		private bool Automaticreconnect()
@@ -297,7 +287,7 @@ namespace Core
 			command.Connection = (MySqlConnection)_connection.GetDbConnection();
 			if (!_connection.isOpen ()) {
 				if (!_connection.Open ()) {
-					//throw new Exception ("could not open dbConnection");
+					throw new Exception ("could not open dbConnection");
 				}
 			}
 			return command;

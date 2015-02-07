@@ -3,6 +3,7 @@ using Core;
 using Infrastructure.Core;
 using System.Collections.Generic;
 using Infrastructure;
+using System.Linq;
 
 namespace DITest
 {
@@ -21,6 +22,7 @@ namespace DITest
 
 			List<IEntity> entities = new List<IEntity> ();
 			entities.Add (new Kunde());
+			entities.Add (new Product ());
 
 			Context context = initializer.GetContext (entities);
 
@@ -66,6 +68,21 @@ namespace DITest
 			}
 
 
+			Console.WriteLine ("Foreignkeytest");
+
+			var selectedCustomer = readCustomer [0];
+			Console.WriteLine ("Using Customer:" + selectedCustomer.Name);
+
+			var product = new Product () {
+				Name = "TestProduct",
+				Customer = selectedCustomer
+			};
+
+			context.Insert (product);
+
+			var readProduct = context.GetTable<Product> (typeof(Product)).FirstOrDefault (); 
+
+			Console.WriteLine ("Readproduct:" + readProduct.Name + " ForeignCustomer:" + readProduct.Customer.Name);
 
 			Console.ReadKey ();
 
