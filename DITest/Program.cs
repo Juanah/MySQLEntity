@@ -15,7 +15,7 @@ namespace DITest
 			IDBConnectionInfo connectionInfo = new ConnectionInfo () {
 				Databasename = "TestDBDI",
 				User = "appserver",
-				Password = "123",
+				Password = "q81kNm~5",
 				Servername = "localhost"
 			};
 			EntityInitializer initializer = new EntityInitializer (connectionInfo);
