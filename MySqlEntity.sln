@@ -39,6 +39,7 @@ Global
 		{F803F296-4BC5-4F97-AB55-A2AF8D0972CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = DITest\DITest.csproj
 		description = @What is working:\n;create table from Classes with primitiv properties\n;create Database \n;insert, update, delete Entities\n;Foreignkey
 	EndGlobalSection
 EndGlobal

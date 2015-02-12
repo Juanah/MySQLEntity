@@ -1,0 +1,12 @@
+﻿2015-02-12 19:23:43,082 [1] ERROR Core.Connection - MySql.Data.MySqlClient.MySqlException: Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: NO) ---> MySql.Data.MySqlClient.MySqlException: Access denied for user 'root'@'localhost' (using password: NO)
+  at MySql.Data.MySqlClient.MySqlStream.ReadPacket () [0x00000] in <filename unknown>:0 
+  at MySql.Data.MySqlClient.NativeDriver.ReadPacket () [0x00000] in <filename unknown>:0 
+  at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ReadPacket () [0x00000] in <filename unknown>:0 
+  --- End of inner exception stack trace ---
+  at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticationFailed (System.Exception ex) [0x00000] in <filename unknown>:0 
+  at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ReadPacket () [0x00000] in <filename unknown>:0 
+  at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.Authenticate (Boolean reset) [0x00000] in <filename unknown>:0 
+  at MySql.Data.MySqlClient.NativeDriver.Authenticate (System.String authMethod, Boolean reset) [0x00000] in <filename unknown>:0 
+  at MySql.Data.MySqlClient.NativeDriver.Open () [0x00000] in <filename unknown>:0 
+  at MySql.Data.MySqlClient.Driver.Open () [0x00000] in <filename unknown>:0 
+  at MySql.Data.MySqlClient.Driver.Create (MySql.Data.MySqlClient.MySqlConnectionStringBuilder settings) [0x00000] in <filename unknown>:0 

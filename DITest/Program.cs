@@ -15,7 +15,7 @@ namespace DITest
 			IDBConnectionInfo connectionInfo = new ConnectionInfo () {
 				Databasename = "TestDBDI",
 				User = "appserver",
-				Password = "q81kNm~5",
+				Password = "Xlov76&4",
 				Servername = "localhost"
 			};
 			EntityInitializer initializer = new EntityInitializer (connectionInfo);
@@ -44,7 +44,6 @@ namespace DITest
 				return;
 			}
 
-			IList<Kunde> kunden = new List<Kunde> ();
 
 			Console.WriteLine ("Write number of Entities wich should be created");
 			int amountOfEntities = Convert.ToInt32(Console.ReadLine ());
