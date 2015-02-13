@@ -31,6 +31,11 @@ namespace DITest
 			return ID;
 		}
 
+		public void SetID (int id)
+		{
+			ID = id;
+		}
+
 		#endregion
 	}
 }

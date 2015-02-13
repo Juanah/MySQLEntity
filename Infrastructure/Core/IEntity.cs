@@ -7,6 +7,8 @@ namespace Infrastructure
 		object DeepCopy ();
 
 		int GetId();
+
+		void SetID(int id);
 	}
 }
 

@@ -67,11 +67,22 @@ namespace Core
 
 			List<Table> tables = _baseParser.getTable (entity, ConnectionInfo.GetDatabasename ());
 
+			//The Last table is always the Table of the Entity itself
+
+			int indexOfEntity = _sqlprocessor.Insert (tables.Last());
+
+			tables.Remove (tables.Last ());
+
 			foreach (var table in tables) {
-				if (!_sqlprocessor.Insert (table)) {
+				if (table == tables.Last()) {
+					continue;
+				}
+				if (_sqlprocessor.Insert (table) == -1) {
 					return false;
 				}
 			}
+
+			((IEntity)entity).SetID (indexOfEntity);
 			return true;
 		}
 

@@ -82,10 +82,10 @@ namespace Core
 			return true;
 		}
 
-		public bool Insert (Table table)
+		public int Insert (Table table)
 		{
 			if (!Automaticreconnect ()) {
-				return false;
+				return -1;
 			}
 			var mysqlCommand = CreateCommand ();
 			var sqlQuery = "INSERT INTO `" + table.DatabaseName + "`.`" + table.TableName + "` VALUES("; 
@@ -114,13 +114,15 @@ namespace Core
 				}
 				mysqlCommand.Parameters.AddWithValue(property.PropertyName,property.Value);
 			}
-
-			sqlQuery += ");";
+			sqlQuery += "); select last_insert_id();";
 			mysqlCommand.CommandText = sqlQuery;
+			/*
 			if (mysqlCommand.ExecuteNonQuery () < 1) {
-				return false;
+				return -1;
 			}
-			return true;
+			*/
+			int id = Convert.ToInt32 (mysqlCommand.ExecuteScalar ());
+			return id;
 		}
 
 		/// Gets the table string.

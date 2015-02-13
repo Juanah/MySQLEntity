@@ -1,9 +1,8 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupItem="DITest\DITest.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Core\Connection.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DITest\Program.cs">
     <Files>
-      <File FileName="MySqlEntityTest\Program.cs" Line="41" Column="41" />
-      <File FileName="Core\Connection.cs" Line="25" Column="25" />
+      <File FileName="DITest\Program.cs" Line="29" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

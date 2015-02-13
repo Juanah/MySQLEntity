@@ -14,8 +14,8 @@ namespace DITest
 			Console.WriteLine ("Entity test with DI-Container");
 			IDBConnectionInfo connectionInfo = new ConnectionInfo () {
 				Databasename = "TestDBDI",
-				User = "appserver",
-				Password = "Xlov76&4",
+				User = "root",
+				Password = "",
 				Servername = "localhost"
 			};
 			EntityInitializer initializer = new EntityInitializer (connectionInfo);
@@ -63,7 +63,7 @@ namespace DITest
 			var readCustomer = context.GetTable<Kunde> (typeof(Kunde));
 
 			foreach (var cus in readCustomer) {
-				Console.WriteLine ("ReadCustomer:" + cus.Name + " LastName:" + cus.LastName);
+				Console.WriteLine ("ReadCustomer: ID:"+ cus.Id + "NAME:"  + cus.Name + " LastName:" + cus.LastName);
 			}
 
 

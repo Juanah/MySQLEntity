@@ -13,7 +13,7 @@ namespace Infrastructure
 
 		bool Update(Table table);
 
-		bool Insert(Table table);
+		int Insert(Table table);
 
 		bool Create(Table table);
 
