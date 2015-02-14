@@ -46,6 +46,7 @@
     <Compile Include="Core\Attributes\PrimitivList.cs" />
     <Compile Include="Core\Attributes\ForeignKey.cs" />
     <Compile Include="Core\QueryProcessor\ISqlQueryProcessor.cs" />
+    <Compile Include="Core\Attributes\Foreignkeylist.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

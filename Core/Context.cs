@@ -27,6 +27,7 @@ namespace Core
 				throw new ArgumentNullException ("processor");
 			}
 			_baseParser = parser;
+			((BaseParser)_baseParser).Context = this;
 			_sqlprocessor = processor;
 			this.Tables = new List<Table> ();
 			this.mDecoder = new BaseDecoder ();

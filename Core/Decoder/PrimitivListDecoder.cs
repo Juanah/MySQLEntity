@@ -16,6 +16,10 @@ namespace Core
 		{
 			throw new NotImplementedException ();
 		}
+		public object GetList (string idList, object context)
+		{
+			throw new NotImplementedException ();
+		}
 		#endregion
 	}
 }

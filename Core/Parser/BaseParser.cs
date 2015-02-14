@@ -79,7 +79,7 @@ namespace Core
 
 						tables.Add (GenerateList (property, primitivListname));
 
-						property = new Property (primitivListname, typeof(string), primitivListname,AttributeTyp.PrimitvList); // Generate the Foreignkey to the List
+						property = new Property (primitivListname, typeof(string), primitivListname, AttributeTyp.PrimitvList); // Generate the Foreignkey to the List
 					} else if (atr.GetType () == typeof(ForeignKey)) {
 						ForeignKey fKey = (ForeignKey)atr;
 						property.ForeignType = fKey.ForeignKeyType;
@@ -87,9 +87,37 @@ namespace Core
 						int id = 0;
 						if (property.Value != null) {
 							id = ((IEntity)property.Value).GetId ();
+							if (id == 0) {
+								Context.Insert (((IEntity)property.Value));
+								id = ((IEntity)property.Value).GetId ();
+							}
 							property.Value = id;
 						}
 						property.AttributeTyp = AttributeTyp.Foreignkey;
+					} else if (atr.GetType () == typeof(Foreignkeylist)) {
+						if (this.Context == null) {
+							throw new NullReferenceException ("Context is null");
+						}
+
+						Foreignkeylist foreignkeyListAtr = (Foreignkeylist)atr;
+
+						List<int> tempIds = new List<int> ();
+						//Cast property to List
+						List<IEntity> tempList = (List<IEntity>)property.Value;
+						foreach (var item in tempList) {
+							Context.Insert (item);
+							tempIds.Add (item.GetId());
+						}
+
+						//Build string with IDs and type wich will be inserted
+						string tempIdList = property.ValueType.ToString () + "/";
+						foreach (var id in tempIds) {
+							tempIdList += id + "-";
+						}
+
+						property.ValueType = typeof(string);
+						property.Value = tempIdList;
+
 					}
 				}
 				properties.Add (property);
@@ -155,6 +183,7 @@ namespace Core
 		/// </summary>
 		/// <value>The m dbname.</value>
 		public string mDbname{ get; set; }
+		public Context Context{ get; set; }
 	}
 }
 

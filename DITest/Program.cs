@@ -69,12 +69,16 @@ namespace DITest
 
 			Console.WriteLine ("Foreignkeytest");
 
-			var selectedCustomer = readCustomer [0];
-			Console.WriteLine ("Using Customer:" + selectedCustomer.Name);
+			Kunde foreignKunde = new Kunde () {
+				LastName = "Entity",
+				Name = "Framework"
+			};
+
+			context.Insert (foreignKunde);
 
 			var product = new Product () {
 				Name = "TestProduct",
-				Customer = selectedCustomer
+				Customer = foreignKunde
 			};
 
 			context.Insert (product);

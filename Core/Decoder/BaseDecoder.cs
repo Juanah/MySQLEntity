@@ -38,6 +38,7 @@ namespace Core
 					int id = (int)objects[counter];
 					obj = (object)((Context)context).GetTable<IEntity> (property.ForeignType).FirstOrDefault(i => i.GetId().Equals(id));
 				} 
+				//if(property.AttributeTyp == AttributeTyp.
 				if (null != prop && prop.CanWrite) {
 					prop.SetValue (origClone, obj);
 				}
@@ -45,6 +46,30 @@ namespace Core
 			}
 			return origClone;
 		}
+
+		public object GetList (string idList,object context)
+		{
+			var typeString = idList.Substring (0, idList.IndexOf ('/'));
+
+			idList.Replace (typeString + "/", "");
+			IEntity entity = ((Context)context).Entities.FirstOrDefault (e => e.GetType ().ToString ().Equals (typeString));
+			//((Context)context).GetTable (typeof(entity));
+			if (entity == null) {
+				throw new ArgumentNullException ("Entity is null");
+			}
+
+			var ids = idList.Split ('-');
+			List<int> iId = new List<int> ();
+			foreach (var item in ids) {
+				iId.Add (Convert.ToInt32(item));
+			}
+
+			List<IEntity> entities = new List<IEntity> ();
+
+			return null;
+
+		}
+
 		#endregion
 	}
 }
